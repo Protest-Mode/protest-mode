@@ -1,0 +1,1 @@
+Nouveau : envoyez un retour par e-mail depuis la barre du haut. Après un plantage, l'application propose d'envoyer le rapport d'erreur par e-mail ; rien n'est envoyé sans votre choix.

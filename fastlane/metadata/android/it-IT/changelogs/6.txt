@@ -1,0 +1,1 @@
+Novità: invia un feedback via email dalla barra in alto. Dopo un arresto anomalo, l'app propone di inviare la segnalazione di errore via email; non viene inviato nulla senza la tua scelta.

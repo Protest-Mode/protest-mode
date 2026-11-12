@@ -1,0 +1,1 @@
+New: send feedback by email from the top bar. After a crash, the app offers to send the error report by email; nothing is sent without your choice.
