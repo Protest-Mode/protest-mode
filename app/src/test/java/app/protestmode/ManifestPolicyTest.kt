@@ -56,7 +56,8 @@ class ManifestPolicyTest {
     @Test
     @Config(sdk = [36])
     fun everyDeclaredScreenIsUsed() {
-        val unused = declaredActions() - guidedActions() - Settings.ACTION_SETTINGS
+        // The mailto query lets the feedback email find an email app.
+        val unused = declaredActions() - guidedActions() - Settings.ACTION_SETTINGS - Intent.ACTION_SENDTO
         assertTrue("Unused in <queries>: $unused", unused.isEmpty())
     }
 

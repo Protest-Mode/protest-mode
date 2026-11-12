@@ -122,4 +122,11 @@
         <item quantity="many">%1$d conseils restants</item>
         <item quantity="other">%1$d conseils restants</item>
     </plurals>
+    <string name="feedback_action">Envoyer un retour</string>
+    <string name="feedback_no_mail_app">Aucune application d\'e-mail. Écrivez à %1$s</string>
+    <string name="feedback_copy">Copier</string>
+    <string name="crash_title">Rapport d\'erreur</string>
+    <string name="crash_text">Une erreur est survenue lors de la précédente ouverture de l\'application. Si vous le souhaitez, vous pouvez nous envoyer par mail les informations du crash afin que nous puissions corriger cela. Cet envoi est facultatif.</string>
+    <string name="crash_send">Envoyer</string>
+    <string name="crash_dismiss">Ne pas envoyer</string>
 </resources>

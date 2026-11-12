@@ -121,4 +121,11 @@
         <item quantity="one">%1$d piece of advice left</item>
         <item quantity="other">%1$d pieces of advice left</item>
     </plurals>
+    <string name="feedback_action">Send feedback</string>
+    <string name="feedback_no_mail_app">No email app found. Write to %1$s</string>
+    <string name="feedback_copy">Copy</string>
+    <string name="crash_title">Error report</string>
+    <string name="crash_text">An error occurred the last time the app was opened. If you wish, you can send us the crash details by email so that we can fix it. Sending is optional.</string>
+    <string name="crash_send">Send</string>
+    <string name="crash_dismiss">Don\'t send</string>
 </resources>

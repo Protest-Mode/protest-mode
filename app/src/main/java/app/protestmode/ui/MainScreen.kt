@@ -4,13 +4,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -27,11 +34,19 @@ import app.protestmode.ui.components.StatusBanner
 @Composable
 fun MainScreen(
     state: MainUiState,
+    snackbar: SnackbarHostState,
     onRowClick: (SettingRow) -> Unit,
     onConfirm: (SettingId) -> Unit,
-    onLabelClick: (ExposureLabel) -> Unit
+    onLabelClick: (ExposureLabel) -> Unit,
+    onFeedback: () -> Unit,
+    onSendCrash: () -> Unit,
+    onDismissCrash: () -> Unit
 ) {
+    if (state.pendingCrash) {
+        CrashDialog(onSendCrash, onDismissCrash)
+    }
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbar) },
         topBar = {
             TopAppBar(
                 title = {
@@ -40,6 +55,14 @@ fun MainScreen(
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold
                     )
+                },
+                actions = {
+                    IconButton(onClick = onFeedback) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_feedback),
+                            contentDescription = stringResource(R.string.feedback_action)
+                        )
+                    }
                 }
             )
         }
@@ -70,4 +93,19 @@ fun MainScreen(
             }
         }
     }
+}
+
+@Composable
+private fun CrashDialog(onSend: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = {},
+        title = { Text(stringResource(R.string.crash_title)) },
+        text = { Text(stringResource(R.string.crash_text)) },
+        confirmButton = {
+            TextButton(onClick = onSend) { Text(stringResource(R.string.crash_send)) }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.crash_dismiss)) }
+        }
+    )
 }

@@ -116,9 +116,14 @@
         <intent>
             <action android:name="android.settings.UWB_SETTINGS" />
         </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="mailto" />
+        </intent>
     </queries>
 
     <application
+        android:name=".ProtestModeApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"

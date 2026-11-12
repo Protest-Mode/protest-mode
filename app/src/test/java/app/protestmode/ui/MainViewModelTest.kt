@@ -11,6 +11,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.protestmode.exposure.ExposureStatus
+import app.protestmode.feedback.CrashStore
 import app.protestmode.setting.ExposureLabel
 import app.protestmode.setting.SettingId
 import java.time.Duration
@@ -54,6 +55,8 @@ class MainViewModelTest {
         MainViewModel(app, handle, Dispatchers.Main.immediate)
 
     private fun idle() = shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(1))
+
+    private fun MainViewModel.nextMail() = runBlocking { withTimeout(1_000) { mailRequests.first() } }
 
     private fun MainViewModel.nextGuide() = runBlocking { withTimeout(1_000) { guideRequests.first() } }
 
@@ -192,5 +195,34 @@ class MainViewModelTest {
         vm.onRowTapped(vm.state.value.rows.first { it.id == SettingId.WIFI })
 
         assertTrue(vm.nextGuide().action != null)
+    }
+
+    @Test
+    fun feedbackOpensAnEmail() {
+        val vm = viewModel()
+        vm.onFeedback()
+        assertTrue(vm.nextMail().getStringExtra(android.content.Intent.EXTRA_SUBJECT)!!.contains("Feedback"))
+    }
+
+    @Test
+    fun aPendingCrashIsOfferedThenSent() {
+        CrashStore(app).record(IllegalStateException("boom"))
+        val vm = viewModel()
+        idle()
+        assertTrue(vm.state.value.pendingCrash)
+
+        vm.onSendCrash()
+        assertTrue(vm.nextMail().getStringExtra(android.content.Intent.EXTRA_TEXT)!!.contains("IllegalStateException"))
+        assertFalse(vm.state.value.pendingCrash)
+        assertNull(CrashStore(app).pending())
+    }
+
+    @Test
+    fun dismissingACrashDeletesIt() {
+        CrashStore(app).record(IllegalStateException("boom"))
+        val vm = viewModel()
+        vm.onDismissCrash()
+        assertFalse(vm.state.value.pendingCrash)
+        assertNull(CrashStore(app).pending())
     }
 }

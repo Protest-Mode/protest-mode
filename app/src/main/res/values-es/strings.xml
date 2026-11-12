@@ -122,4 +122,11 @@
         <item quantity="many">%1$d consejos pendientes</item>
         <item quantity="other">%1$d consejos pendientes</item>
     </plurals>
+    <string name="feedback_action">Enviar comentarios</string>
+    <string name="feedback_no_mail_app">No hay ninguna aplicación de correo. Escribe a %1$s</string>
+    <string name="feedback_copy">Copiar</string>
+    <string name="crash_title">Informe de error</string>
+    <string name="crash_text">Se produjo un error la última vez que se abrió la aplicación. Si quieres, puedes enviarnos por correo los datos del fallo para que podamos corregirlo. El envío es opcional.</string>
+    <string name="crash_send">Enviar</string>
+    <string name="crash_dismiss">No enviar</string>
 </resources>

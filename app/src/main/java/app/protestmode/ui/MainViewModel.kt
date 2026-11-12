@@ -11,6 +11,8 @@ import androidx.lifecycle.viewModelScope
 import app.protestmode.data.ConfirmationStore
 import app.protestmode.exposure.Exposure
 import app.protestmode.exposure.ExposureStatus
+import app.protestmode.feedback.CrashStore
+import app.protestmode.feedback.FeedbackMail
 import app.protestmode.setting.ExposureLabel
 import app.protestmode.setting.Reading
 import app.protestmode.setting.SettingCatalog
@@ -40,7 +42,9 @@ data class MainUiState(
     val remainingAdvice: Int = 0,
     val securedLabels: Set<ExposureLabel> = emptySet(),
     val selectedLabel: ExposureLabel? = null,
-    val rows: List<SettingRow> = emptyList()
+    val rows: List<SettingRow> = emptyList(),
+    /** A crash report from the previous run waits for the user's decision. */
+    val pendingCrash: Boolean = false
 )
 
 class MainViewModel
@@ -56,6 +60,14 @@ constructor(
     private val guideChannel = Channel<Intent>(Channel.BUFFERED)
 
     val guideRequests: Flow<Intent> = guideChannel.receiveAsFlow()
+
+    private val mailChannel = Channel<Intent>(Channel.BUFFERED)
+
+    /** Emails to open in the user's email app, consumed once by the UI. */
+    val mailRequests: Flow<Intent> = mailChannel.receiveAsFlow()
+
+    private val crashStore = CrashStore(application)
+    private var crashTrace: String? = crashStore.pending()
 
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
@@ -141,6 +153,23 @@ constructor(
         publish()
     }
 
+    fun onFeedback() {
+        mailChannel.trySend(FeedbackMail.feedback(context))
+    }
+
+    fun onSendCrash() {
+        crashTrace?.let { mailChannel.trySend(FeedbackMail.crashReport(context, it)) }
+        dropCrash()
+    }
+
+    fun onDismissCrash() = dropCrash()
+
+    private fun dropCrash() {
+        crashStore.clear()
+        crashTrace = null
+        publish()
+    }
+
     private fun refresh(delayMs: Long = 0) {
         refreshJob?.cancel()
         refreshJob =
@@ -161,6 +190,7 @@ constructor(
                 remainingAdvice = exposure.remainingAdvice,
                 securedLabels = exposure.securedLabels,
                 selectedLabel = label,
+                pendingCrash = crashTrace != null,
                 rows =
                 readings
                     .filterKeys { label == null || label in it.labels }
