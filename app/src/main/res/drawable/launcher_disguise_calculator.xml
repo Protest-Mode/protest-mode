@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:scaleX="1.4" android:scaleY="1.4" android:pivotX="54" android:pivotY="54">
+    <path android:fillColor="#546E7A" android:pathData="M34,18H74A16,16 0 0,1 90,34V74A16,16 0 0,1 74,90H34A16,16 0 0,1 18,74V34A16,16 0 0,1 34,18Z" />
+    <path android:strokeColor="#7C939E" android:strokeWidth="1.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M54,32L54,76" />
+    <path android:strokeColor="#7C939E" android:strokeWidth="1.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M32,54L76,54" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M36,43L48,43" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M61,38L71,48" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M71,38L61,48" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M36,65L48,65" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4.5" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M42,59L42,71" />
+    <path android:fillColor="#FF9F43" android:pathData="M62,56H70A5,5 0 0,1 75,61V69A5,5 0 0,1 70,74H62A5,5 0 0,1 57,69V61A5,5 0 0,1 62,56Z" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M61,62.5L71,62.5" />
+    <path android:strokeColor="#FFFFFF" android:strokeWidth="4" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M61,68.5L71,68.5" />
+    </group>
+</vector>

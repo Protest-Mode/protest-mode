@@ -34,7 +34,7 @@ local components
 components="$(print -r -- "$manifest" | grep -E "E: (activity|service|receiver|provider)" -A3 | sed -n 's/.*android:name.*="\([^"]*\)".*/\1/p' | sort -u)"
 print -r -- "$components" | while read -r component; do
     case "$component" in
-        app.protestmode.MainActivity|androidx.startup.InitializationProvider) ok "$component" ;;
+        app.protestmode.MainActivity|app.protestmode.Launcher*|androidx.startup.InitializationProvider) ok "$component" ;;
         *) error "Unexpected component: $component"; failed=1 ;;
     esac
 done

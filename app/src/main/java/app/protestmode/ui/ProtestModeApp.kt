@@ -1,5 +1,6 @@
 package app.protestmode.ui
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -19,6 +20,7 @@ import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import app.protestmode.R
+import app.protestmode.disguise.DisguiseWindow
 import app.protestmode.feedback.FeedbackMail
 
 @Composable
@@ -37,6 +39,10 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
     val focused = LocalWindowInfo.current.isWindowFocused
     LaunchedEffect(focused) {
         if (focused) viewModel.onResume()
+    }
+
+    LaunchedEffect(state.disguise) {
+        (context as? Activity)?.let { DisguiseWindow.apply(it, state.disguise) }
     }
 
     LaunchedEffect(viewModel) {
@@ -76,6 +82,7 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
         onConfirm = viewModel::confirmRow,
         onLabelClick = viewModel::toggleLabel,
         onFeedback = viewModel::onFeedback,
+        onDisguiseSelected = viewModel::onDisguiseSelected,
         onSendCrash = viewModel::onSendCrash,
         onDismissCrash = viewModel::onDismissCrash
     )

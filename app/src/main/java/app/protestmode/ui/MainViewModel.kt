@@ -9,6 +9,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import app.protestmode.data.ConfirmationStore
+import app.protestmode.disguise.Disguise
+import app.protestmode.disguise.DisguiseManager
 import app.protestmode.exposure.Exposure
 import app.protestmode.exposure.ExposureStatus
 import app.protestmode.feedback.CrashStore
@@ -44,7 +46,8 @@ data class MainUiState(
     val selectedLabel: ExposureLabel? = null,
     val rows: List<SettingRow> = emptyList(),
     /** A crash report from the previous run waits for the user's decision. */
-    val pendingCrash: Boolean = false
+    val pendingCrash: Boolean = false,
+    val disguise: Disguise = Disguise.ORIGINAL
 )
 
 class MainViewModel
@@ -67,6 +70,8 @@ constructor(
     val mailRequests: Flow<Intent> = mailChannel.receiveAsFlow()
 
     private val crashStore = CrashStore(application)
+    private val disguiseManager = DisguiseManager(application)
+    private var disguise: Disguise = disguiseManager.current()
     private var crashTrace: String? = crashStore.pending()
 
     private val _state = MutableStateFlow(MainUiState())
@@ -153,6 +158,12 @@ constructor(
         publish()
     }
 
+    fun onDisguiseSelected(target: Disguise) {
+        disguiseManager.apply(target)
+        disguise = target
+        publish()
+    }
+
     fun onFeedback() {
         mailChannel.trySend(FeedbackMail.feedback(context))
     }
@@ -191,6 +202,7 @@ constructor(
                 securedLabels = exposure.securedLabels,
                 selectedLabel = label,
                 pendingCrash = crashTrace != null,
+                disguise = disguise,
                 rows =
                 readings
                     .filterKeys { label == null || label in it.labels }

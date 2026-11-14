@@ -129,4 +129,14 @@
     <string name="crash_text">Une erreur est survenue lors de la précédente ouverture de l\'application. Si vous le souhaitez, vous pouvez nous envoyer par mail les informations du crash afin que nous puissions corriger cela. Cet envoi est facultatif.</string>
     <string name="crash_send">Envoyer</string>
     <string name="crash_dismiss">Ne pas envoyer</string>
+    <string name="disguise_action">Changer l\'icône et le nom de l\'app</string>
+    <string name="disguise_title">Icône et nom de l\'app</string>
+    <string name="disguise_text">Vous pouvez changer l\'apparence de cette app afin de la dissimuler dans votre téléphone. Le nom réel de l\'app reste visible dans les fichiers et paramètres du téléphone.</string>
+    <string name="disguise_apply">Appliquer</string>
+    <string name="disguise_cancel">Annuler</string>
+    <string name="disguise_weather">Météo</string>
+    <string name="disguise_clock">Horloge</string>
+    <string name="disguise_calculator">Calculatrice</string>
+    <string name="disguise_flashlight">Lampe torche</string>
+    <string name="disguise_compass">Boussole</string>
 </resources>

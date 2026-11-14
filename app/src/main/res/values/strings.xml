@@ -128,4 +128,14 @@
     <string name="crash_text">An error occurred the last time the app was opened. If you wish, you can send us the crash details by email so that we can fix it. Sending is optional.</string>
     <string name="crash_send">Send</string>
     <string name="crash_dismiss">Don\'t send</string>
+    <string name="disguise_action">Change the app icon and name</string>
+    <string name="disguise_title">App icon and name</string>
+    <string name="disguise_text">You can change how this app looks to hide it on your phone. The app\'s real name stays visible in the phone\'s files and settings.</string>
+    <string name="disguise_apply">Apply</string>
+    <string name="disguise_cancel">Cancel</string>
+    <string name="disguise_weather">Weather</string>
+    <string name="disguise_clock">Clock</string>
+    <string name="disguise_calculator">Calculator</string>
+    <string name="disguise_flashlight">Flashlight</string>
+    <string name="disguise_compass">Compass</string>
 </resources>

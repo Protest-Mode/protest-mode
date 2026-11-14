@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="disguise_weather_background">#3B8BEB</color>
+    <color name="disguise_clock_background">#24A6C9</color>
+    <color name="disguise_calculator_background">#546E7A</color>
+    <color name="disguise_flashlight_background">#F57C00</color>
+    <color name="disguise_compass_background">#1E1E1E</color>
+</resources>

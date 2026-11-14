@@ -12,6 +12,7 @@ Android almost never lets an app change a setting by itself. The app therefore o
 - Normal permissions only: `ACCESS_WIFI_STATE`, `ACCESS_NETWORK_STATE`, `BLUETOOTH` (API ≤ 30), `BLUETOOTH_ADMIN` (API ≤ 32), `NFC`, `USE_FINGERPRINT` (API ≤ 28), `USE_BIOMETRIC`, `QUERY_ADVANCED_PROTECTION_MODE`.
 - The only things stored, on the phone, are the SHA-256 fingerprint of the device name you checked and, after a crash, a report of the error until you send or dismiss it. Cloud backup is disabled.
 - Feedback and crash reports go through your own email app, only when you choose to send them.
+- The app can take the icon and name of a weather, clock, calculator, flashlight or compass app in the launcher and in recent apps, where its screen preview is then hidden. Its real name stays visible in Settings › Apps and in the app store.
 
 Full privacy policy: [PRIVACY.md](PRIVACY.md).
 

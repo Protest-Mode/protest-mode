@@ -10,6 +10,7 @@ import android.provider.Settings
 import androidx.lifecycle.SavedStateHandle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import app.protestmode.disguise.Disguise
 import app.protestmode.exposure.ExposureStatus
 import app.protestmode.feedback.CrashStore
 import app.protestmode.setting.ExposureLabel
@@ -224,5 +225,15 @@ class MainViewModelTest {
         vm.onDismissCrash()
         assertFalse(vm.state.value.pendingCrash)
         assertNull(CrashStore(app).pending())
+    }
+
+    @Test
+    fun choosingADisguiseUpdatesTheScreenAndTheLauncher() {
+        val vm = viewModel()
+        assertEquals(Disguise.ORIGINAL, vm.state.value.disguise)
+
+        vm.onDisguiseSelected(Disguise.COMPASS)
+        assertEquals(Disguise.COMPASS, vm.state.value.disguise)
+        assertEquals(Disguise.COMPASS, viewModel().state.value.disguise)
     }
 }
