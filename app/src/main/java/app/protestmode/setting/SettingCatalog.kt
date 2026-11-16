@@ -40,13 +40,18 @@ fun interface SettingSource {
     fun readAll(context: Context): Map<SettingId, Reading>
 
     companion object {
-        val Device =
-            SettingSource { context ->
-                val probe = Probe(context)
-                SettingCatalog.all
-                    .filter { it.isAvailable(context) }
-                    .sortedBy { it.id.ordinal }
-                    .associate { it.id to it.read(probe) }
-            }
+        val Device = SettingSource { context -> readSafely(SettingCatalog.all, context) }
+
+        // A setting that fails to read (vendor bug, system service restarting) must not take the whole
+        // screen down: it is shown as unknown, never as protected.
+        internal fun readSafely(settings: List<Setting>, context: Context): Map<SettingId, Reading> {
+            val probe = Probe(context)
+            return settings
+                .filter { setting -> runCatching { setting.isAvailable(context) }.getOrDefault(true) }
+                .sortedBy { it.id.ordinal }
+                .associate { setting ->
+                    setting.id to runCatching { setting.read(probe) }.getOrElse { Reading(SettingState.UNKNOWN) }
+                }
+        }
     }
 }

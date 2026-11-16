@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.ContentObserver
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -117,8 +118,9 @@ constructor(
         }
 
     init {
+        // A key a vendor refuses to observe is still read again on resume and on focus.
         SettingCatalog.all.flatMap { it.observedUris }.distinct().forEach {
-            context.contentResolver.registerContentObserver(it, false, settingsObserver)
+            runCatching { context.contentResolver.registerContentObserver(it, false, settingsObserver) }
         }
         refresh()
     }
@@ -137,10 +139,15 @@ constructor(
         viewModelScope.launch {
             val protectedAutomatically =
                 withContext(readDispatcher) {
-                    row.state != SettingState.UNKNOWN && setting.tryProtect(context)
+                    row.state != SettingState.UNKNOWN && runCatching { setting.tryProtect(context) }.getOrDefault(false)
                 }
             if (!protectedAutomatically) {
-                guideChannel.trySend(withContext(readDispatcher) { SettingCatalog.guideIntent(setting, context) })
+                val intent = withContext(readDispatcher) {
+                    runCatching {
+                        SettingCatalog.guideIntent(setting, context)
+                    }.getOrElse { Intent(Settings.ACTION_SETTINGS) }
+                }
+                guideChannel.trySend(intent)
             }
             refresh()
         }
@@ -159,8 +166,7 @@ constructor(
     }
 
     fun onDisguiseSelected(target: Disguise) {
-        disguiseManager.apply(target)
-        disguise = target
+        if (disguiseManager.apply(target)) disguise = target
         publish()
     }
 

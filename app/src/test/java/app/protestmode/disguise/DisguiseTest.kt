@@ -35,11 +35,25 @@ class DisguiseTest {
     fun exactlyOneLauncherEntryIsEnabledAfterASwitch() {
         val manager = DisguiseManager(context)
 
-        manager.apply(Disguise.WEATHER)
+        assertTrue(manager.apply(Disguise.WEATHER))
         assertEquals(Disguise.WEATHER, manager.current())
         assertEquals(listOf(Disguise.WEATHER), enabledAliases())
 
         manager.apply(Disguise.ORIGINAL)
+        assertEquals(listOf(Disguise.ORIGINAL), enabledAliases())
+    }
+
+    @Test
+    fun anUnreadableLauncherStateFallsBackToTheOriginal() {
+        Disguise.entries.forEach {
+            context.packageManager.setComponentEnabledSetting(
+                ComponentName(context, "app.protestmode.${it.alias}"),
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP
+            )
+        }
+        assertEquals(Disguise.ORIGINAL, DisguiseManager(context).current())
+        assertTrue(DisguiseManager(context).apply(Disguise.ORIGINAL))
         assertEquals(listOf(Disguise.ORIGINAL), enabledAliases())
     }
 

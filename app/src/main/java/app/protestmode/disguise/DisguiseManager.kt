@@ -10,12 +10,19 @@ class DisguiseManager(context: Context) {
     private val appContext = context.applicationContext
     private val packageManager = appContext.packageManager
 
-    fun current(): Disguise = Disguise.entries.firstOrNull { isEnabled(it) } ?: Disguise.ORIGINAL
+    fun current(): Disguise =
+        runCatching { Disguise.entries.firstOrNull { isEnabled(it) } }.getOrNull() ?: Disguise.ORIGINAL
 
-    fun apply(target: Disguise) {
-        // The target is enabled first, so that the launcher never ends up without an entry for the app.
-        setEnabled(target, true)
-        Disguise.entries.filter { it != target }.forEach { setEnabled(it, false) }
+    /** Returns false, leaving the launcher entries unchanged, when the target cannot be enabled. */
+    fun apply(target: Disguise): Boolean {
+        // The target is enabled and checked first, so that the launcher never ends up without an entry.
+        val enabled = runCatching {
+            setEnabled(target, true)
+            isEnabled(target)
+        }.getOrDefault(false)
+        if (!enabled) return false
+        Disguise.entries.filter { it != target }.forEach { runCatching { setEnabled(it, false) } }
+        return true
     }
 
     private fun component(disguise: Disguise) =

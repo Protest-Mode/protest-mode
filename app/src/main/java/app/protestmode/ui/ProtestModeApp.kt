@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.material3.SnackbarDuration
@@ -47,21 +48,13 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
 
     LaunchedEffect(viewModel) {
         viewModel.guideRequests.collect { intent ->
-            try {
-                context.startActivity(intent)
-            } catch (_: ActivityNotFoundException) {
-                context.startActivity(Intent(Settings.ACTION_SETTINGS))
-            } catch (_: SecurityException) {
-                context.startActivity(Intent(Settings.ACTION_SETTINGS))
-            }
+            if (!context.startSafely(intent)) context.startSafely(Intent(Settings.ACTION_SETTINGS))
         }
     }
 
     LaunchedEffect(viewModel) {
         viewModel.mailRequests.collect { intent ->
-            try {
-                context.startActivity(intent)
-            } catch (_: ActivityNotFoundException) {
+            if (!context.startSafely(intent)) {
                 val result = snackbar.showSnackbar(
                     message = resources.getString(R.string.feedback_no_mail_app, FeedbackMail.SUPPORT_EMAIL),
                     actionLabel = resources.getString(R.string.feedback_copy),
@@ -86,4 +79,14 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
         onSendCrash = viewModel::onSendCrash,
         onDismissCrash = viewModel::onDismissCrash
     )
+}
+
+/** Opens another app's screen; returns false when no app can handle it or the system refuses. */
+private fun Context.startSafely(intent: Intent): Boolean = try {
+    startActivity(intent)
+    true
+} catch (_: ActivityNotFoundException) {
+    false
+} catch (_: SecurityException) {
+    false
 }
