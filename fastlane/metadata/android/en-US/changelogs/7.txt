@@ -1,0 +1,1 @@
+New: change the app's icon and name to hide it on your phone (weather, clock, calculator, flashlight or compass). After this update, you may need to add the icon back to your home screen.

@@ -1,0 +1,1 @@
+Novità: cambia l'icona e il nome dell'app per nasconderla nel telefono (meteo, orologio, calcolatrice, torcia o bussola). Dopo questo aggiornamento, potrebbe essere necessario aggiungere di nuovo l'icona alla schermata Home.
