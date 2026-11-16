@@ -60,6 +60,8 @@ android {
 
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        // Only used by kotlin-reflect and the coroutines debug agent, neither of which the app uses.
+        resources.excludes += listOf("kotlin/**.kotlin_builtins", "DebugProbesKt.bin")
     }
 }
 
