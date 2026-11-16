@@ -88,10 +88,10 @@ for loc in en fr es it; do
         size=${foreground[$density]}
         inner=$(( size * 66 / 108 ))
         magick "$work/full-$loc.png" -resize ${inner}x${inner} -background none -gravity center -extent ${size}x${size} \
-            -quality 92 "$dir/ic_launcher_foreground.webp"
+            -quality 85 -define webp:method=6 -define webp:use-sharp-yuv=true "$dir/ic_launcher_foreground.webp"
         magick "$work/mono-$loc.png" -resize ${inner}x${inner} -background none -gravity center -extent ${size}x${size} \
             -alpha extract -background white -alpha shape -define webp:lossless=true "$dir/ic_launcher_monochrome.webp"
-        magick "$work/full-$loc.png" -resize ${legacy[$density]}x${legacy[$density]} -quality 92 "$dir/ic_launcher.webp"
+        magick "$work/full-$loc.png" -resize ${legacy[$density]}x${legacy[$density]} -quality 85 -define webp:method=6 -define webp:use-sharp-yuv=true "$dir/ic_launcher.webp"
     done
     # Resource selection matches the language before the API level: without a localized
     # anydpi-v26 copy, the localized legacy icon would win over the adaptive one on Android 8+.
