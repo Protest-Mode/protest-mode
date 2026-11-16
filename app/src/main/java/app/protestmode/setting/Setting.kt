@@ -73,6 +73,8 @@ class Probe(val context: Context) {
     val airplane: SettingState by lazy { AirplaneSetting.readAirplane(context) }
 }
 
+inline fun <reified T : Enum<T>> enumByName(name: String?): T? = enumValues<T>().firstOrNull { it.name == name }
+
 fun Boolean?.toSettingState(): SettingState = when (this) {
     true -> SettingState.ON
     false -> SettingState.OFF

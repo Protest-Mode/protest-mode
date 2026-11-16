@@ -9,7 +9,7 @@ import android.provider.Settings
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import app.protestmode.data.ConfirmationStore
+import app.protestmode.data.Confirmations
 import app.protestmode.disguise.Disguise
 import app.protestmode.disguise.DisguiseManager
 import app.protestmode.exposure.Exposure
@@ -22,7 +22,7 @@ import app.protestmode.setting.SettingCatalog
 import app.protestmode.setting.SettingId
 import app.protestmode.setting.SettingSource
 import app.protestmode.setting.SettingState
-import java.security.MessageDigest
+import app.protestmode.setting.enumByName
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -80,28 +80,10 @@ constructor(
 
     private var readings: Map<SettingId, Reading> = emptyMap()
 
-    private val confirmationStore = ConfirmationStore(application)
-
-    /** Confirmations with a fingerprint are stored across launches; the others only last for the session. */
-    private var confirmations: Map<SettingId, String>
-        get() {
-            val session =
-                savedState
-                    .get<HashMap<String, String>>(KEY_CONFIRMED)
-                    .orEmpty()
-                    .mapNotNull { (name, key) -> idOf(name)?.let { it to key } }
-                    .toMap()
-            return confirmationStore.load() + session
-        }
-        set(value) {
-            savedState[KEY_CONFIRMED] = HashMap(value.filterValues { it.isEmpty() }.mapKeys { it.key.name })
-            confirmationStore.save(value)
-        }
+    private val confirmations = Confirmations(application, savedState)
 
     private var selectedLabel: ExposureLabel?
-        get() = savedState.get<String>(KEY_LABEL)?.let { name ->
-            ExposureLabel.entries.firstOrNull { it.name == name }
-        }
+        get() = enumByName<ExposureLabel>(savedState.get<String>(KEY_LABEL))
         set(value) {
             savedState[KEY_LABEL] = value?.name
         }
@@ -156,7 +138,7 @@ constructor(
     fun confirmRow(id: SettingId) {
         val reading = readings[id] ?: return
         if (reading.state != SettingState.UNKNOWN) return
-        confirmations = confirmations + (id to fingerprint(reading.confirmationKey))
+        confirmations.confirm(id, reading.confirmationKey)
         publish()
     }
 
@@ -198,7 +180,7 @@ constructor(
     }
 
     private fun publish() {
-        val confirmedIds = validConfirmations()
+        val confirmedIds = confirmations.valid(readings)
         val exposure = Exposure.evaluate(readings.mapValues { it.value.state }, confirmedIds)
         val label = selectedLabel
         _state.value =
@@ -216,28 +198,9 @@ constructor(
             )
     }
 
-    private fun validConfirmations(): Set<SettingId> {
-        val stored = confirmations
-        val valid = stored.filter { (id, key) ->
-            readings[id]?.let { key == fingerprint(it.confirmationKey) } ==
-                true
-        }
-        if (valid.size != stored.size) confirmations = valid
-        return valid.keys
-    }
-
     private companion object {
-        const val KEY_CONFIRMED = "confirmed"
         const val KEY_LABEL = "label"
         const val OBSERVER_DELAY_MS = 300L
         const val RESUME_DELAY_MS = 100L
-
-        fun idOf(name: String) = SettingId.entries.firstOrNull { it.name == name }
-
-        fun fingerprint(value: String?): String {
-            if (value == null) return ""
-            val digest = MessageDigest.getInstance("SHA-256").digest(value.toByteArray(Charsets.UTF_8))
-            return digest.joinToString("") { "%02x".format(it) }
-        }
     }
 }
