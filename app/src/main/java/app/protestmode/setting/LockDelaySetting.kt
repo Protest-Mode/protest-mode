@@ -26,8 +26,6 @@ object LockDelaySetting : Setting {
     override val observedUris =
         listOf(systemUri(Settings.System.SCREEN_OFF_TIMEOUT), secureUri(HiddenKeys.LOCK_SCREEN_LOCK_AFTER_TIMEOUT))
 
-    override fun isAvailable(context: Context) = true
-
     override fun read(probe: Probe): Reading {
         val context = probe.context
         val screenOff = screenOff(context)
@@ -83,17 +81,9 @@ object LockDelaySetting : Setting {
         }
     }
 
-    private fun screenOff(context: Context): Int? = try {
-        Settings.System.getInt(context.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-    } catch (_: Settings.SettingNotFoundException) {
-        null
-    }
+    private fun screenOff(context: Context): Int? =
+        SettingsReader.system(context.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
 
-    private fun lockAfter(context: Context): Long? = try {
-        Settings.Secure.getLong(context.contentResolver, HiddenKeys.LOCK_SCREEN_LOCK_AFTER_TIMEOUT)
-    } catch (_: Settings.SettingNotFoundException) {
-        null
-    } catch (_: SecurityException) {
-        null
-    }
+    private fun lockAfter(context: Context): Long? =
+        SettingsReader.secureLong(context.contentResolver, HiddenKeys.LOCK_SCREEN_LOCK_AFTER_TIMEOUT)
 }

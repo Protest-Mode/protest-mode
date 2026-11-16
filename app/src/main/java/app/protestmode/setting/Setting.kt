@@ -96,7 +96,7 @@ interface Setting {
 
     val observedUris: List<Uri> get() = emptyList()
 
-    fun isAvailable(context: Context): Boolean
+    fun isAvailable(context: Context): Boolean = true
 
     fun read(probe: Probe): Reading
 

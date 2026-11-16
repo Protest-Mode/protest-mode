@@ -11,8 +11,6 @@ object AirplaneSetting : Setting {
     override val iconRes = R.drawable.ic_airplane
     override val observedUris = listOf(globalUri(Settings.Global.AIRPLANE_MODE_ON))
 
-    override fun isAvailable(context: Context) = true
-
     override fun read(probe: Probe): Reading {
         val detail =
             when (probe.airplane) {

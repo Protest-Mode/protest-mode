@@ -24,8 +24,6 @@ object SecurityPatchSetting : Setting {
     override val onLabelRes = R.string.state_up_to_date
     override val offLabelRes = R.string.state_outdated
 
-    override fun isAvailable(context: Context) = true
-
     override fun read(probe: Probe): Reading {
         val date = parse(Build.VERSION.SECURITY_PATCH) ?: return Reading(SettingState.UNKNOWN)
         // The app language may differ from the system one (per-app language on Android 13+).

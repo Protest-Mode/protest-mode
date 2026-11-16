@@ -15,17 +15,10 @@ object HotspotSetting : Setting {
     override fun isAvailable(context: Context) = context.packageManager.hasSystemFeature(PackageManager.FEATURE_WIFI)
 
     // No public API exposes the hotspot state. WifiManager.isWifiApEnabled() is hidden and may be
-    // blocked by non-SDK interface restrictions, in which case the state is reported as unknown.
+    // blocked by non-SDK interface restrictions: the reflection error then reads as unknown (readSafely).
     override fun read(probe: Probe): Reading {
         val manager = probe.context.applicationContext.getSystemService(WifiManager::class.java)
-        val enabled =
-            try {
-                manager?.let { WifiManager::class.java.getMethod("isWifiApEnabled").invoke(it) as? Boolean }
-            } catch (_: ReflectiveOperationException) {
-                null
-            } catch (_: SecurityException) {
-                null
-            }
+        val enabled = manager?.let { WifiManager::class.java.getMethod("isWifiApEnabled").invoke(it) as? Boolean }
         return Reading(enabled.toSettingState())
     }
 

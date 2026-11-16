@@ -20,8 +20,6 @@ object DeviceNameSetting : Setting {
     override val unknownLabelRes = R.string.state_to_check
     override val observedUris = listOf(globalUri(Settings.Global.DEVICE_NAME))
 
-    override fun isAvailable(context: Context) = true
-
     override fun read(probe: Probe): Reading {
         val name = name(probe.context)
         return Reading(
@@ -49,7 +47,7 @@ object DeviceNameSetting : Setting {
     @SuppressLint("MissingPermission")
     private fun name(context: Context): String? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME)?.let { return it }
+            SettingsReader.globalString(context.contentResolver, Settings.Global.DEVICE_NAME)?.let { return it }
         }
         return try {
             context.getSystemService(BluetoothManager::class.java)?.adapter?.name

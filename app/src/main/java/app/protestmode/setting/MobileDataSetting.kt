@@ -69,9 +69,9 @@ object MobileDataSetting : Setting {
         }
     }
 
-    override fun guideIntents(context: Context): List<Intent> = buildList {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) add(Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY))
-        add(Intent(Settings.ACTION_DATA_ROAMING_SETTINGS))
-        add(Intent(Settings.ACTION_WIRELESS_SETTINGS))
-    }
+    override fun guideIntents(context: Context): List<Intent> = panelThen(
+        Settings.Panel.ACTION_INTERNET_CONNECTIVITY,
+        Settings.ACTION_DATA_ROAMING_SETTINGS,
+        Settings.ACTION_WIRELESS_SETTINGS
+    )
 }

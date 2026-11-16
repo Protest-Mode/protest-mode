@@ -17,15 +17,7 @@ object AdvancedProtectionSetting : Setting {
     override fun isAvailable(context: Context) = manager(context) != null
 
     @SuppressLint("MissingPermission", "NewApi")
-    override fun read(probe: Probe): Reading {
-        val enabled =
-            try {
-                manager(probe.context)?.isAdvancedProtectionEnabled
-            } catch (_: SecurityException) {
-                null
-            }
-        return Reading(enabled.toSettingState())
-    }
+    override fun read(probe: Probe) = Reading(manager(probe.context)?.isAdvancedProtectionEnabled.toSettingState())
 
     // No public intent opens the Advanced Protection screen; it lives in the security settings.
     override fun guideIntents(context: Context): List<Intent> = listOf(Intent(Settings.ACTION_SECURITY_SETTINGS))

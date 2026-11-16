@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.wifi.WifiManager
-import android.os.Build
 import android.provider.Settings
 import app.protestmode.R
 
@@ -29,11 +28,8 @@ object WifiSetting : Setting {
     }
 
     // WifiManager.setWifiEnabled() always returns false for apps targeting API 29 or higher.
-    override fun guideIntents(context: Context): List<Intent> = buildList {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) add(Intent(Settings.Panel.ACTION_WIFI))
-        add(Intent(Settings.ACTION_WIFI_SETTINGS))
-        add(Intent(Settings.ACTION_WIRELESS_SETTINGS))
-    }
+    override fun guideIntents(context: Context): List<Intent> =
+        panelThen(Settings.Panel.ACTION_WIFI, Settings.ACTION_WIFI_SETTINGS, Settings.ACTION_WIRELESS_SETTINGS)
 
     private fun wifiManager(context: Context) = context.applicationContext.getSystemService(WifiManager::class.java)
 }

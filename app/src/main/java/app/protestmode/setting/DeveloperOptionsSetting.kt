@@ -17,8 +17,6 @@ object DeveloperOptionsSetting : Setting {
             globalUri(HiddenKeys.ADB_WIFI_ENABLED)
         )
 
-    override fun isAvailable(context: Context) = true
-
     override fun read(probe: Probe): Reading {
         val resolver = probe.context.contentResolver
         val developer = SettingsReader.global(resolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED)
