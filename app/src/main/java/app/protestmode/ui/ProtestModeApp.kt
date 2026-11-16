@@ -58,17 +58,19 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
         }
     }
 
-    MainScreen(
-        state = state,
-        snackbar = snackbar,
-        onRowClick = viewModel::onRowTapped,
-        onConfirm = viewModel::confirmRow,
-        onLabelClick = viewModel::toggleLabel,
-        onFeedback = viewModel::onFeedback,
-        onDisguiseSelected = viewModel::onDisguiseSelected,
-        onSendCrash = viewModel::onSendCrash,
-        onDismissCrash = viewModel::onDismissCrash
-    )
+    val actions = remember(viewModel) {
+        MainActions(
+            onRowClick = viewModel::onRowTapped,
+            onConfirm = viewModel::confirmRow,
+            onLabelClick = viewModel::toggleLabel,
+            onFeedback = viewModel::onFeedback,
+            onDisguiseSelected = viewModel::onDisguiseSelected,
+            onSendCrash = viewModel::onSendCrash,
+            onDismissCrash = viewModel::onDismissCrash
+        )
+    }
+
+    MainScreen(state = state, snackbar = snackbar, actions = actions)
 }
 
 /** Opens another app's screen; returns false when no app can handle it or the system refuses. */

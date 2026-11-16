@@ -26,7 +26,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import app.protestmode.R
 import app.protestmode.setting.SettingCatalog
-import app.protestmode.setting.SettingState
+import app.protestmode.ui.RowStatus
 import app.protestmode.ui.SettingRow
 import app.protestmode.ui.a11yRes
 import app.protestmode.ui.stateRes
@@ -44,7 +44,6 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
     val description =
         listOfNotNull(stringResource(R.string.setting_row_a11y, title, state, verdict), risk, row.detail, instruction)
             .joinToString(", ")
-    val needsConfirmation = row.state == SettingState.UNKNOWN && !row.confirmed
     Column(modifier.fillMaxWidth()) {
         Row(
             modifier =
@@ -80,7 +79,7 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
             }
             RiskBadge(row.id.risk, active = !row.isProtected)
         }
-        if (needsConfirmation) {
+        if (row.status == RowStatus.TO_CHECK) {
             OutlinedButton(
                 onClick = onConfirm,
                 modifier = Modifier.padding(start = 56.dp, end = 16.dp, bottom = 8.dp).heightIn(min = 48.dp)
@@ -95,14 +94,10 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
 private fun StatusPill(row: SettingRow) {
     val colors = LocalStatusColors.current
     val (glyph, container, content) =
-        when {
-            row.isProtected -> Triple(R.drawable.ic_check, colors.discreet, colors.onDiscreet)
-            row.state == SettingState.UNKNOWN -> Triple(
-                R.drawable.ic_question,
-                colors.unknown,
-                MaterialTheme.colorScheme.surface
-            )
-            else -> Triple(R.drawable.ic_close, colors.exposed, colors.onExposed)
+        when (row.status) {
+            RowStatus.PROTECTED -> Triple(R.drawable.ic_check, colors.discreet, colors.onDiscreet)
+            RowStatus.TO_CHECK -> Triple(R.drawable.ic_question, colors.unknown, MaterialTheme.colorScheme.surface)
+            RowStatus.EXPOSED -> Triple(R.drawable.ic_close, colors.exposed, colors.onExposed)
         }
     Box(
         contentAlignment = Alignment.Center,

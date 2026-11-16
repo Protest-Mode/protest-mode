@@ -57,12 +57,14 @@ fun SettingRow.stateRes() = if (state == SettingState.UNKNOWN && confirmed) {
 }
 
 @StringRes
-fun SettingRow.verdictRes() = when {
-    isProtected -> R.string.target_ok
-    state == SettingState.UNKNOWN -> R.string.target_unknown
-    id.category != SettingCategory.TRACKING -> R.string.target_fix
-    id.desiredEnabled -> R.string.target_not_ok_enable
-    else -> R.string.target_not_ok
+fun SettingRow.verdictRes() = when (status) {
+    RowStatus.PROTECTED -> R.string.target_ok
+    RowStatus.TO_CHECK -> R.string.target_unknown
+    RowStatus.EXPOSED -> when {
+        id.category != SettingCategory.TRACKING -> R.string.target_fix
+        id.desiredEnabled -> R.string.target_not_ok_enable
+        else -> R.string.target_not_ok
+    }
 }
 
 @StringRes

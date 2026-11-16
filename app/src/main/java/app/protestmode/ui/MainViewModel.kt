@@ -36,8 +36,15 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+enum class RowStatus { PROTECTED, TO_CHECK, EXPOSED }
+
 data class SettingRow(val id: SettingId, val state: SettingState, val confirmed: Boolean, val detail: String? = null) {
-    val isProtected get() = Exposure.isProtected(id, state, confirmed)
+    val status: RowStatus = when {
+        Exposure.isProtected(id, state, confirmed) -> RowStatus.PROTECTED
+        state == SettingState.UNKNOWN -> RowStatus.TO_CHECK
+        else -> RowStatus.EXPOSED
+    }
+    val isProtected get() = status == RowStatus.PROTECTED
 }
 
 /** One-off actions the screen carries out on behalf of the ViewModel. */
