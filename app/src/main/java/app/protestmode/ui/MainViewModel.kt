@@ -40,6 +40,15 @@ data class SettingRow(val id: SettingId, val state: SettingState, val confirmed:
     val isProtected get() = Exposure.isProtected(id, state, confirmed)
 }
 
+/** One-off actions the screen carries out on behalf of the ViewModel. */
+sealed interface UiEvent {
+    /** A system screen that guides the user to protect a setting. */
+    data class OpenScreen(val intent: Intent) : UiEvent
+
+    /** An email to open in the user's email app. */
+    data class SendMail(val intent: Intent) : UiEvent
+}
+
 data class MainUiState(
     val exposure: ExposureStatus = ExposureStatus.EXPOSED,
     val remainingAdvice: Int = 0,
@@ -61,14 +70,10 @@ constructor(
 ) : AndroidViewModel(application) {
     private val context = application.applicationContext
 
-    private val guideChannel = Channel<Intent>(Channel.BUFFERED)
+    private val eventChannel = Channel<UiEvent>(Channel.BUFFERED)
 
-    val guideRequests: Flow<Intent> = guideChannel.receiveAsFlow()
-
-    private val mailChannel = Channel<Intent>(Channel.BUFFERED)
-
-    /** Emails to open in the user's email app, consumed once by the UI. */
-    val mailRequests: Flow<Intent> = mailChannel.receiveAsFlow()
+    /** Consumed once by the UI. */
+    val events: Flow<UiEvent> = eventChannel.receiveAsFlow()
 
     private val crashStore = CrashStore(application)
     private val disguiseManager = DisguiseManager(application)
@@ -129,7 +134,7 @@ constructor(
                         SettingCatalog.guideIntent(setting, context)
                     }.getOrElse { Intent(Settings.ACTION_SETTINGS) }
                 }
-                guideChannel.trySend(intent)
+                eventChannel.trySend(UiEvent.OpenScreen(intent))
             }
             refresh()
         }
@@ -153,11 +158,11 @@ constructor(
     }
 
     fun onFeedback() {
-        mailChannel.trySend(FeedbackMail.feedback(context))
+        eventChannel.trySend(UiEvent.SendMail(FeedbackMail.feedback(context)))
     }
 
     fun onSendCrash() {
-        crashTrace?.let { mailChannel.trySend(FeedbackMail.crashReport(context, it)) }
+        crashTrace?.let { eventChannel.trySend(UiEvent.SendMail(FeedbackMail.crashReport(context, it))) }
         dropCrash()
     }
 

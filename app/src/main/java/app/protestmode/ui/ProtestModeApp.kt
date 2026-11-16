@@ -6,6 +6,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.provider.Settings
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
@@ -47,23 +48,12 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
     }
 
     LaunchedEffect(viewModel) {
-        viewModel.guideRequests.collect { intent ->
-            if (!context.startSafely(intent)) context.startSafely(Intent(Settings.ACTION_SETTINGS))
-        }
-    }
-
-    LaunchedEffect(viewModel) {
-        viewModel.mailRequests.collect { intent ->
-            if (!context.startSafely(intent)) {
-                val result = snackbar.showSnackbar(
-                    message = resources.getString(R.string.feedback_no_mail_app, FeedbackMail.SUPPORT_EMAIL),
-                    actionLabel = resources.getString(R.string.feedback_copy),
-                    duration = SnackbarDuration.Long
-                )
-                if (result == SnackbarResult.ActionPerformed) {
-                    context.getSystemService(ClipboardManager::class.java)
-                        ?.setPrimaryClip(ClipData.newPlainText(FeedbackMail.SUPPORT_EMAIL, FeedbackMail.SUPPORT_EMAIL))
-                }
+        viewModel.events.collect { event ->
+            when (event) {
+                is UiEvent.OpenScreen ->
+                    if (!context.startSafely(event.intent)) context.startSafely(Intent(Settings.ACTION_SETTINGS))
+                is UiEvent.SendMail ->
+                    if (!context.startSafely(event.intent)) offerSupportAddress(context, resources, snackbar)
             }
         }
     }
@@ -89,4 +79,17 @@ private fun Context.startSafely(intent: Intent): Boolean = try {
     false
 } catch (_: SecurityException) {
     false
+}
+
+/** Without an email app, the support address is shown with an action to copy it. */
+private suspend fun offerSupportAddress(context: Context, resources: Resources, snackbar: SnackbarHostState) {
+    val result = snackbar.showSnackbar(
+        message = resources.getString(R.string.feedback_no_mail_app, FeedbackMail.SUPPORT_EMAIL),
+        actionLabel = resources.getString(R.string.feedback_copy),
+        duration = SnackbarDuration.Long
+    )
+    if (result == SnackbarResult.ActionPerformed) {
+        context.getSystemService(ClipboardManager::class.java)
+            ?.setPrimaryClip(ClipData.newPlainText(FeedbackMail.SUPPORT_EMAIL, FeedbackMail.SUPPORT_EMAIL))
+    }
 }

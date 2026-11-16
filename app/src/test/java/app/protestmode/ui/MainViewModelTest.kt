@@ -57,9 +57,11 @@ class MainViewModelTest {
 
     private fun idle() = shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(1))
 
-    private fun MainViewModel.nextMail() = runBlocking { withTimeout(1_000) { mailRequests.first() } }
+    private fun MainViewModel.nextMail() =
+        runBlocking { withTimeout(1_000) { events.first() } }.let { (it as UiEvent.SendMail).intent }
 
-    private fun MainViewModel.nextGuide() = runBlocking { withTimeout(1_000) { guideRequests.first() } }
+    private fun MainViewModel.nextGuide() =
+        runBlocking { withTimeout(1_000) { events.first() } }.let { (it as UiEvent.OpenScreen).intent }
 
     @Test
     fun listsEveryAvailableSettingInTheFixedOrder() {
