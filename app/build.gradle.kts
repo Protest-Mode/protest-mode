@@ -14,8 +14,8 @@ android {
         applicationId = appId
         minSdk = 23
         targetSdk = 36
-        versionCode = 8
-        versionName = "0.1.7"
+        versionCode = 9
+        versionName = "0.1.8"
         // AndroidX ships its strings in about a hundred languages; the app only offers these ones.
         androidResources.localeFilters += listOf("en", "fr", "es", "b+es+419", "it")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
