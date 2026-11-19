@@ -26,14 +26,15 @@ fun RiskBadge(risk: RiskLevel, active: Boolean, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(50),
         color = if (active) container else Color.Transparent,
-        contentColor = if (active) content else MaterialTheme.colorScheme.onSurfaceVariant,
-        border = if (active) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+        // Once the setting is protected, its risk stays a badge but a quiet one: pale frame, light text.
+        contentColor = if (active) content else MaterialTheme.colorScheme.outline,
+        border = if (active) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
         modifier = modifier.semantics { contentDescription = description }
     ) {
         Text(
             text = stringResource(risk.labelRes()),
             style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
+            fontWeight = if (active) FontWeight.Bold else FontWeight.Normal,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
         )
     }
