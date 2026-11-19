@@ -20,16 +20,16 @@ work="$(mktemp -d)"
 info "Measuring the words to set"
 local -A widths
 local word
-for word in PROTEST MODE MANIF MODO MANI MODALITÀ MANIFESTAZIONE; do
+for word in PROTEST MODE MANIF MODO MANI PROTESTA MODALITÀ MANIFESTAZIONE; do
     widths[$word]="$(magick -background white -fill black -font "$font" -pointsize 1000 label:"$word" -trim -format %w info:)"
 done
 
 info "Composing one logo per language"
 python3 -I - "$logo" "$work" "${widths[PROTEST]}" "${widths[MODE]}" "${widths[MANIF]}" "${widths[MODO]}" "${widths[MANI]}" \
-    "${widths[MODALITÀ]}" "${widths[MANIFESTAZIONE]}" <<'PY'
+    "${widths[PROTESTA]}" "${widths[MODALITÀ]}" "${widths[MANIFESTAZIONE]}" <<'PY'
 import re, sys
 logo, work = sys.argv[1], sys.argv[2]
-w = dict(zip(["PROTEST", "MODE", "MANIF", "MODO", "MANI", "MODALITÀ", "MANIFESTAZIONE"], map(int, sys.argv[3:])))
+w = dict(zip(["PROTEST", "MODE", "MANIF", "MODO", "MANI", "PROTESTA", "MODALITÀ", "MANIFESTAZIONE"], map(int, sys.argv[3:])))
 source = open(logo).read()
 
 # Text of the master logo: black glyphs drawn from a path, white outline drawn through a mask.
@@ -39,7 +39,7 @@ art = re.sub(r'<path d="[^"]*" stroke-width="18"[^>]*mask="url\(#stroke1_[0-9_]+
 assert "stroke1_" not in art, "unexpected logo structure"
 
 CAP, MAX_WIDTH, SIZE, BOTTOM, GAP, CENTER = 0.740, 444, 200, 928, 54, 503
-LINES = {"en": ("PROTEST", "MODE"), "es": ("MODO", "MANI"), "it": ("MODALITÀ", "MANIFESTAZIONE")}
+LINES = {"en": ("PROTEST", "MODE"), "es": ("MODO", "MANI"), "es419": ("MODO", "PROTESTA"), "it": ("MODALITÀ", "MANIFESTAZIONE")}
 
 def text(lines, fill, stroke, centered=False):
     s1, s2 = (min(SIZE, MAX_WIDTH / (w[line] / 1000)) for line in lines)
@@ -78,10 +78,12 @@ ok "Rendered $(ls "$work"/*.png | wc -l | tr -d ' ') images"
 local -A legacy foreground
 legacy=(mdpi 48 hdpi 72 xhdpi 96 xxhdpi 144 xxxhdpi 192)
 foreground=(mdpi 108 hdpi 162 xhdpi 216 xxhdpi 324 xxxhdpi 432)
+# Latin American Spanish (es-419): Android also falls back to it for es-US, es-MX and the other countries
+# of the region, from Android 7.
 local -A qualifier
-qualifier=(en "" fr "-fr" es "-es" it "-it")
+qualifier=(en "" fr "-fr" es "-es" it "-it" es419 "-b+es+419")
 local loc density size inner dir
-for loc in en fr es it; do
+for loc in en fr es it es419; do
     for density in ${(k)foreground}; do
         dir="$res/mipmap${qualifier[$loc]}-$density"
         mkdir -p "$dir"
@@ -110,7 +112,7 @@ done
 
 if [[ -n "${ICON_EXPORT_DIR:-}" ]]; then
     mkdir -p "$ICON_EXPORT_DIR"
-    for loc in en fr es it; do
+    for loc in en fr es it es419; do
         magick "$work/full-$loc.png" -resize 512x512 -strip -define png:exclude-chunks=date,time "PNG32:$ICON_EXPORT_DIR/icon-$loc.png"
     done
     ok "512 px icons in $ICON_EXPORT_DIR"

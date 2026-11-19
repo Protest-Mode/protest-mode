@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- "Mani" is Spanish slang for a protest in Spain only; the other strings come from values-es.
+         From Android 7, es-US, es-MX and the other countries of the region fall back to es-419. -->
+    <string name="app_name">Modo Protesta</string>
+</resources>

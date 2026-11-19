@@ -49,6 +49,14 @@ class LocalizationTest {
     fun spanishAppName() = assertEquals("Modo Mani", appName())
 
     @Test
+    @Config(qualifiers = "b+es+419")
+    fun latinAmericanSpanishAppName() = assertEquals("Modo Protesta", appName())
+
+    @Test
+    @Config(qualifiers = "b+es+419")
+    fun latinAmericanSpanishKeepsTheSpanishStrings() = assertEquals("Seguimiento de la ubicación", label())
+
+    @Test
     @Config(qualifiers = "it")
     fun italianAppName() = assertEquals("Modalità Manifestazione", appName())
 }
