@@ -104,7 +104,7 @@
         <item quantity="many">%1$d conseils restants</item>
         <item quantity="other">%1$d conseils restants</item>
     </plurals>
-    <string name="feedback_action">Envoyer un retour</string>
+    <string name="feedback_action">Nous écrire</string>
     <string name="feedback_no_mail_app">Aucune application d\'e-mail. Écrivez à %1$s</string>
     <string name="feedback_copy">Copier</string>
     <string name="crash_title">Rapport d\'erreur</string>
@@ -181,4 +181,24 @@
     <string name="action_close">Fermer</string>
     <string name="setting_steps_one">Action manuelle</string>
     <string name="setting_steps_many">Actions manuelles</string>
+    <string name="walkthrough_banner">Votre niveau de protection en un coup d\'œil</string>
+    <string name="walkthrough_labels">Filtrez les réglages selon ce que vous voulez protéger.</string>
+    <string name="walkthrough_setting">Touchez un réglage à changer : l\'app vous dit quoi faire et ouvre le bon écran.</string>
+    <string name="walkthrough_next">Suivant</string>
+    <string name="walkthrough_done">C\'est parti</string>
+    <string name="walkthrough_skip">Passer</string>
+    <string name="walkthrough_ask_title">Première utilisation ?</string>
+    <string name="walkthrough_ask_text">Voulez-vous une présentation rapide de l\'app ? Elle ne prend que quelques secondes.</string>
+    <string name="walkthrough_ask_yes">Oui, volontiers</string>
+    <string name="walkthrough_ask_no">Non merci</string>
+    <string name="menu_more">Avancé</string>
+    <string name="menu_hide_app">Masquer l\'app</string>
+    <string name="menu_replay_tour">Revoir la présentation</string>
+    <string name="menu_contribute">Contribuer</string>
+    <string name="more_title">Avancé</string>
+    <string name="more_back">Retour</string>
+    <string name="more_hide_app_summary">Donnez-lui l\'apparence d\'une app ordinaire.</string>
+    <string name="more_tour_summary">Les principaux éléments de l\'écran, en 3 étapes.</string>
+    <string name="more_write_summary">Un bug, une idée, une question : par e-mail.</string>
+    <string name="more_contribute_summary">Le code est libre : proposez des améliorations sur GitHub.</string>
 </resources>

@@ -104,7 +104,7 @@
         <item quantity="many">%1$d consigli rimanenti</item>
         <item quantity="other">%1$d consigli rimanenti</item>
     </plurals>
-    <string name="feedback_action">Invia un feedback</string>
+    <string name="feedback_action">Scrivici</string>
     <string name="feedback_no_mail_app">Nessuna app email trovata. Scrivi a %1$s</string>
     <string name="feedback_copy">Copia</string>
     <string name="crash_title">Segnalazione di errore</string>
@@ -181,4 +181,24 @@
     <string name="action_close">Chiudi</string>
     <string name="setting_steps_one">Azione manuale</string>
     <string name="setting_steps_many">Azioni manuali</string>
+    <string name="walkthrough_banner">Il tuo livello di protezione a colpo d\'occhio</string>
+    <string name="walkthrough_labels">Filtra le impostazioni in base a ciò che vuoi proteggere.</string>
+    <string name="walkthrough_setting">Tocca un\'impostazione da cambiare: l\'app ti dice cosa fare e apre la schermata giusta.</string>
+    <string name="walkthrough_next">Avanti</string>
+    <string name="walkthrough_done">Ho capito</string>
+    <string name="walkthrough_skip">Salta</string>
+    <string name="walkthrough_ask_title">Prima volta qui?</string>
+    <string name="walkthrough_ask_text">Vuoi una breve presentazione dell\'app? Richiede solo pochi secondi.</string>
+    <string name="walkthrough_ask_yes">Sì, mostrami</string>
+    <string name="walkthrough_ask_no">No, grazie</string>
+    <string name="menu_more">Avanzate</string>
+    <string name="menu_hide_app">Nascondi l\'app</string>
+    <string name="menu_replay_tour">Rivedi la presentazione</string>
+    <string name="menu_contribute">Contribuisci</string>
+    <string name="more_title">Avanzate</string>
+    <string name="more_back">Indietro</string>
+    <string name="more_hide_app_summary">Dalle l\'aspetto di un\'app qualsiasi.</string>
+    <string name="more_tour_summary">Le parti principali dello schermo, in 3 passaggi.</string>
+    <string name="more_write_summary">Un bug, un\'idea, una domanda: via email.</string>
+    <string name="more_contribute_summary">Il codice è libero: proponi miglioramenti su GitHub.</string>
 </resources>

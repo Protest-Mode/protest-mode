@@ -1,6 +1,7 @@
 package app.protestmode.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PermissionInfo
@@ -9,6 +10,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.protestmode.MainActivity
 import app.protestmode.R
@@ -17,13 +19,27 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.ExternalResource
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(qualifiers = "fr")
 class MainActivityTest {
-    @get:Rule
+    // The first-launch tour would cover the screen: it is marked as seen before the activity starts.
+    @get:Rule(order = 0)
+    val tourSeen =
+        object : ExternalResource() {
+            override fun before() {
+                ApplicationProvider.getApplicationContext<Context>()
+                    .getSharedPreferences("walkthrough", Context.MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("seen", true)
+                    .commit()
+            }
+        }
+
+    @get:Rule(order = 1)
     val compose = createAndroidComposeRule<MainActivity>()
 
     @Before

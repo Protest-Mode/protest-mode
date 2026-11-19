@@ -7,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.provider.Settings
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
@@ -66,12 +67,16 @@ fun ProtestModeApp(viewModel: MainViewModel = viewModel()) {
             onFeedback = viewModel::onFeedback,
             onDisguiseSelected = viewModel::onDisguiseSelected,
             onSendCrash = viewModel::onSendCrash,
-            onDismissCrash = viewModel::onDismissCrash
+            onDismissCrash = viewModel::onDismissCrash,
+            // The browser loads the page: the app itself still has no Internet access.
+            onContribute = { context.startSafely(Intent(Intent.ACTION_VIEW, Uri.parse(PROJECT_URL))) }
         )
     }
 
     MainScreen(state = state, snackbar = snackbar, actions = actions)
 }
+
+private const val PROJECT_URL = "https://github.com/Protest-Mode/protest-mode"
 
 /** Opens another app's screen; returns false when no app can handle it or the system refuses. */
 private fun Context.startSafely(intent: Intent): Boolean = try {
