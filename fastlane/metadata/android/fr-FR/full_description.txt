@@ -1,13 +1,31 @@
-Mode Manif vous aide à vérifier et configurer votre téléphone pour limiter les risques lorsque vous participez aux manifestations.
+Vous allez à une manifestation, un rassemblement ou une marche ? Votre téléphone peut révéler où vous êtes, qui vous êtes et ce qu'il contient. Avec Mode Manif, vérifiez en quelques secondes les réglages de vie privée et de sécurité de votre téléphone Android, puis corrigez-les avant de partir.
 
-<b>Aperçu clair et rapide</b>
+<b>Votre protection en un coup d'œil</b>
+Exposé, Partiellement protégé ou Discret : sachez tout de suite où vous en êtes. Pour chaque réglage, identifiez les risques et comment les corriger. Filtrez selon ce que vous voulez protéger : votre localisation, votre identité, l'historique de vos activités ou le contenu de votre téléphone.
 
-Vérifiez en un seul coup d'œil la confidentialité de votre téléphone. Le risque est exprimé en niveau avec des catégories simples et compréhensibles.
+<b>Ce que vous vérifiez</b>
+• Pistage de la localisation : mode avion, localisation, Wi-Fi, Bluetooth, données mobiles, NFC, point d'accès, bande ultralarge (UWB), recherche Wi-Fi et Bluetooth en arrière-plan
+• Sécurité en cas de saisie du téléphone : verrouillage de l'écran, chiffrement du stockage, déverrouillage par empreinte et par visage, délai avant verrouillage, notifications sur l'écran de verrouillage, options pour les développeurs et débogage USB, mises à jour de sécurité, Protection avancée
+• Anonymat : le nom de l'appareil visible par les téléphones à proximité, le micro de l'assistant vocal
 
-<b>Passif</b>
+<b>Accès direct aux réglages</b>
+Ouvrez directement le bon écran de paramètres, avec la marche à suivre pour votre version d'Android.
 
-L'application ne modifie rien sans votre accord : elle vérifie la configuration et vous guide pour l'adapter vous-même.
+<b>Vous gardez la main</b>
+Vous décidez de chaque changement : rien n'est modifié dans votre dos. L'application ne touche pas à votre téléphone, elle analyse et vous explique comment améliorer vos réglages.
 
-<b>Confidentiel</b>
+<b>Une icône discrète</b>
+Changez l'icône et le nom de l'app en une app générique pour la dissimuler dans votre téléphone. Son aperçu dans les applis récentes est alors masqué aussi.
 
-Aucune connexion internet, pas de trackers ni aucune collecte de données. Développée en open-source.
+<b>Confidentielle par conception</b>
+• Aucune permission Internet : vos données ne quittent jamais votre téléphone
+• Pas de compte, pas de pub, pas de traqueurs, aucune collecte de données
+• Logiciel libre et open source (GPL-3.0), au code public
+• Fonctionne sans les services Google Play, y compris sur les téléphones Android dégooglisés
+• Légère et stable
+• Compatible avec de très anciens appareils
+
+<b>Pour qui ?</b>
+Manifestants, militants, journalistes, observateurs juridiques, street medics, et toute personne qui veut un téléphone plus discret avant une manifestation, une mobilisation ou une réunion sensible.
+
+Aucune app ne rend un téléphone intraçable : avec Mode Manif, réduisez les risques. Le téléphone le plus sûr en manif reste celui que vous laissez chez vous.

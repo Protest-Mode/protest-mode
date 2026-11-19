@@ -1,13 +1,31 @@
-Modalità Manifestazione ti aiuta a verificare e configurare il tuo telefono per limitare i rischi quando partecipi alle manifestazioni.
+Vai a una manifestazione, un corteo o un presidio? Il tuo telefono può rivelare dove sei, chi sei e cosa contiene. Con Modalità Manifestazione, controlla in pochi secondi le impostazioni di privacy e sicurezza del tuo telefono Android e correggile prima di uscire.
 
-<b>Panoramica chiara e rapida</b>
+<b>La tua protezione a colpo d'occhio</b>
+Esposto, Parzialmente protetto o Discreto: scopri subito a che punto sei. Per ogni impostazione, individua i rischi e come correggerli. Filtra in base a ciò che vuoi proteggere: la tua posizione, la tua identità, la cronologia delle tue attività o il contenuto del telefono.
 
-Verifica a colpo d'occhio la riservatezza del tuo telefono. Il rischio è espresso in livelli, con categorie semplici e comprensibili.
+<b>Cosa controlli</b>
+• Tracciamento della posizione: modalità aereo, posizione, Wi-Fi, Bluetooth, dati mobili, NFC, hotspot, banda ultralarga (UWB), ricerca Wi-Fi e Bluetooth in background
+• Sicurezza se il telefono viene sequestrato: blocco schermo, crittografia della memoria, sblocco con impronta e con il volto, tempo prima del blocco, notifiche sulla schermata di blocco, opzioni sviluppatore e debug USB, aggiornamenti di sicurezza, Protezione avanzata
+• Anonimato: il nome del dispositivo visibile ai telefoni vicini, il microfono dell'assistente vocale
 
-<b>Passiva</b>
+<b>Accesso diretto alle impostazioni</b>
+Apri direttamente la schermata di impostazioni giusta, con i passaggi per la tua versione di Android.
 
-L'app non modifica nulla senza il tuo consenso: controlla la configurazione e ti guida per adattarla in autonomia.
+<b>Il controllo resta a te</b>
+Ogni modifica la decidi tu: nulla cambia alle tue spalle. L'app non tocca il tuo telefono: analizza le impostazioni e ti spiega come migliorarle.
 
-<b>Riservata</b>
+<b>Un'icona discreta</b>
+Dai all'app un'icona e un nome generici per nasconderla sul telefono. Anche la sua anteprima nelle app recenti viene nascosta.
 
-Nessuna connessione a Internet, nessun tracker e nessuna raccolta di dati. Sviluppata come open source.
+<b>Riservata per scelta</b>
+• Nessun permesso Internet: i tuoi dati non lasciano mai il telefono
+• Nessun account, nessuna pubblicità, nessun tracker, nessuna raccolta di dati
+• Software libero e open source (GPL-3.0), con codice pubblico
+• Funziona senza i servizi Google Play, anche sui telefoni Android senza Google
+• Leggera e stabile
+• Compatibile con dispositivi molto vecchi
+
+<b>Per chi è</b>
+Manifestanti, attivisti, giornalisti, osservatori legali, soccorritori volontari e chiunque voglia un telefono più riservato prima di una manifestazione, una mobilitazione o un incontro delicato.
+
+Nessuna app rende un telefono impossibile da rintracciare: con Modalità Manifestazione, riduci i rischi. Il telefono più sicuro a una manifestazione resta quello che lasci a casa.

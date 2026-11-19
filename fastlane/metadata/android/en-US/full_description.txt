@@ -1,13 +1,31 @@
-Protest Mode helps you check and set up your phone to limit the risks when you take part in protests.
+Going to a protest, a march or a rally? Your phone can reveal where you are, who you are and what it holds. With Protest Mode, check the privacy and security settings of your Android phone in seconds, then fix them before you go.
 
-<b>Clear, quick overview</b>
+<b>Your protection at a glance</b>
+Exposed, Partially protected or Discreet: know right away where you stand. For each setting, identify the risks and how to fix them. Filter by what you want to protect: your location, your identity, your activity history or the content of your phone.
 
-Check your phone's privacy at a glance. The risk is shown as a level, with simple and understandable categories.
+<b>What you check</b>
+• Location tracking: airplane mode, location, Wi-Fi, Bluetooth, mobile data, NFC, hotspot, Ultra-Wideband (UWB), background Wi-Fi and Bluetooth scanning
+• Security if your phone is seized: screen lock, storage encryption, fingerprint and face unlock, delay before locking, notifications on the lock screen, developer options and USB debugging, security updates, Advanced Protection
+• Anonymity: the device name that nearby phones can see, the voice assistant microphone
 
-<b>Passive</b>
+<b>Direct access to settings</b>
+Open the right settings screen directly, with what to do for your Android version.
 
-The app changes nothing without your consent: it checks the configuration and guides you to adjust it yourself.
+<b>You stay in control</b>
+You decide every change: nothing is changed behind your back. The app never touches your phone: it analyzes your settings and explains how to improve them.
 
-<b>Private</b>
+<b>A discreet icon</b>
+Give the app a generic icon and name to hide it on your phone. Its preview in recent apps is then hidden too.
 
-No Internet connection, no trackers and no data collection. Developed as open source.
+<b>Private by design</b>
+• No Internet permission: your data never leaves your phone
+• No account, no ads, no trackers, no data collection
+• Free and open source software (GPL-3.0), with public code
+• Works without Google Play services, including on de-Googled Android phones
+• Lightweight and stable
+• Compatible with very old devices
+
+<b>Who it is for</b>
+Protesters, activists, journalists, legal observers, street medics, and anyone who wants a more private phone before a demonstration, a mobilization or a sensitive meeting.
+
+No app can make a phone untraceable: with Protest Mode, you reduce the risks. The safest phone at a protest is still the one you leave at home.
