@@ -28,4 +28,4 @@ Changez l'icône et le nom de l'app en une app générique pour la dissimuler da
 <b>Pour qui?</b>
 Manifestants, militants, journalistes, observateurs légaux, secouristes de rue, et toute personne qui veut un téléphone plus discret avant une manifestation, une mobilisation ou une réunion sensible.
 
-Aucune app ne rend un téléphone intraçable : avec Mode Manif, réduisez les risques. Le téléphone le plus sûr en manif reste celui que vous laissez chez vous.
+Aucune app ne rend un téléphone intraçable : avec Mode Manif, réduisez les risques. Le téléphone le plus sûr en manifestation reste celui que vous laissez chez vous.
