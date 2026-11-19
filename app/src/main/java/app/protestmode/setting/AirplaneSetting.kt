@@ -9,6 +9,7 @@ object AirplaneSetting : Setting {
     override val id = SettingId.AIRPLANE
     override val titleRes = R.string.setting_airplane
     override val iconRes = R.drawable.ic_airplane
+    override val instructionRes = R.string.instruction_airplane
     override val observedUris = listOf(globalUri(Settings.Global.AIRPLANE_MODE_ON))
 
     override fun read(probe: Probe): Reading {

@@ -117,12 +117,21 @@ private val DarkScheme =
 
 val LocalStatusColors = staticCompositionLocalOf { LightStatus }
 
+/** Like the system settings: a tinted screen with the settings on lighter cards (darker cards at night). */
+data class ListColors(val screen: Color, val card: Color)
+
+private val LightList = ListColors(screen = Color(0xFFEBEDEF), card = Color.White)
+private val DarkList = ListColors(screen = Color(0xFF0D0F11), card = Color(0xFF232528))
+
+val LocalListColors = staticCompositionLocalOf { LightList }
+
 @Composable
 fun ProtestModeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     // Dynamic colour is not used: it would tint the app after the wallpaper, differently on each phone.
     val scheme = if (darkTheme) DarkScheme else LightScheme
     CompositionLocalProvider(
-        LocalStatusColors provides if (darkTheme) DarkStatus else LightStatus
+        LocalStatusColors provides if (darkTheme) DarkStatus else LightStatus,
+        LocalListColors provides if (darkTheme) DarkList else LightList
     ) {
         MaterialTheme(colorScheme = scheme, content = content)
     }

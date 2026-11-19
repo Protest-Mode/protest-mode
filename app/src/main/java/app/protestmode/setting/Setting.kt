@@ -88,7 +88,8 @@ interface Setting {
 
     @get:DrawableRes val iconRes: Int
 
-    @get:StringRes val instructionRes: Int? get() = null
+    /** Steps shown in the setting's dialog, one per line. */
+    @get:StringRes val instructionRes: Int
 
     @get:StringRes val onLabelRes: Int get() = R.string.setting_state_on
 

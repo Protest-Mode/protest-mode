@@ -5,7 +5,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.protestmode.R
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,7 +36,7 @@ class AirplaneSettingTest {
 
     @Test
     fun simpleToggleNeedsNoInstruction() {
-        assertNull(AirplaneSetting.instructionRes)
+        assertEquals(R.string.instruction_airplane, AirplaneSetting.instructionRes)
     }
 
     @Test

@@ -3,4 +3,18 @@
     <!-- "Mani" is Spanish slang for a protest in Spain only; the other strings come from values-es.
          From Android 7, es-US, es-MX and the other countries of the region fall back to es-419. -->
     <string name="app_name">Modo Protesta</string>
+    <string name="action_open_settings">Abrir configuración</string>
+    <string name="why_developer_options">Tu teléfono puede leerse desde una computadora.</string>
+    <string name="instruction_wifi_scan_vendor">Abre la configuración de ubicación\nDesactiva la búsqueda de redes Wi‑Fi</string>
+    <string name="instruction_ble_scan_vendor">Abre la configuración de ubicación\nDesactiva la búsqueda de dispositivos Bluetooth</string>
+    <string name="instruction_lockscreen_notifications_vendor">Primero configura un bloqueo de pantalla\nEn la configuración de notificaciones, oculta su contenido en la pantalla de bloqueo</string>
+    <string name="instruction_hotspot">Desactiva el hotspot</string>
+    <string name="instruction_encryption">Primero configura un bloqueo de pantalla\nActiva la encriptación</string>
+    <string name="instruction_wifi_scan">Desactiva «Búsqueda de Wi‑Fi»</string>
+    <string name="instruction_wifi_scan_menu">Abre Ubicación › ⋮ › Analizando\nDesactiva «Búsqueda de redes Wi‑Fi»</string>
+    <string name="instruction_wifi_scan_entry">Abre Ubicación › Buscando\nDesactiva «Búsqueda de redes Wi‑Fi»</string>
+    <string name="instruction_ble_scan_menu">Abre Ubicación › ⋮ › Analizando\nDesactiva «Búsqueda de dispositivos Bluetooth»</string>
+    <string name="instruction_ble_scan_entry">Abre Ubicación › Buscando\nDesactiva «Búsqueda de dispositivos Bluetooth»</string>
+    <string name="instruction_lockscreen_notifications_v10">Primero configura un bloqueo de pantalla\nDesactiva «Notificaciones confidenciales»</string>
+    <string name="instruction_advanced_protection">Abre Seguridad y privacidad › Otros parámetros de configuración\nAbre Protección avanzada\nActiva «Protección del dispositivo»</string>
 </resources>

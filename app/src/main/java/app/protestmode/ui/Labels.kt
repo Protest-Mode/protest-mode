@@ -9,6 +9,7 @@ import app.protestmode.setting.ExposureLabel
 import app.protestmode.setting.RiskLevel
 import app.protestmode.setting.SettingCatalog
 import app.protestmode.setting.SettingCategory
+import app.protestmode.setting.SettingId
 import app.protestmode.setting.SettingState
 import app.protestmode.setting.labelRes
 import app.protestmode.ui.theme.LocalStatusColors
@@ -60,10 +61,45 @@ fun SettingRow.stateRes() = if (state == SettingState.UNKNOWN && confirmed) {
 fun SettingRow.verdictRes() = when (status) {
     RowStatus.PROTECTED -> R.string.target_ok
     RowStatus.TO_CHECK -> R.string.target_unknown
-    RowStatus.EXPOSED -> when {
-        id.category != SettingCategory.TRACKING -> R.string.target_fix
-        id.desiredEnabled -> R.string.target_not_ok_enable
-        else -> R.string.target_not_ok
+    // What to do, without repeating the state: the setting's name already says what it is about.
+    RowStatus.EXPOSED -> when (id) {
+        SettingId.SCREEN_LOCK -> R.string.target_secure
+        SettingId.LOCKSCREEN_NOTIFICATIONS -> R.string.target_hide
+        SettingId.SECURITY_PATCH -> R.string.target_update
+        SettingId.BIOMETRICS -> R.string.target_remove
+        SettingId.LOCK_DELAY -> R.string.target_shorten
+        SettingId.DEVICE_NAME -> R.string.target_change
+        SettingId.VOICE_ASSISTANT -> R.string.target_block
+        else -> if (id.desiredEnabled) R.string.target_enable else R.string.target_disable
+    }
+}
+
+/** Why a setting to change is a risk; null once it is protected. */
+@StringRes
+fun SettingRow.whyRes(): Int? = when (status) {
+    RowStatus.PROTECTED -> null
+    RowStatus.TO_CHECK -> R.string.why_unknown
+    RowStatus.EXPOSED -> when (id) {
+        SettingId.AIRPLANE -> R.string.why_airplane
+        SettingId.LOCATION -> R.string.why_location
+        SettingId.WIFI -> R.string.why_wifi
+        SettingId.BLUETOOTH -> R.string.why_bluetooth
+        SettingId.WIFI_SCAN -> R.string.why_wifi_scan
+        SettingId.HOTSPOT -> R.string.why_hotspot
+        SettingId.MOBILE_DATA -> R.string.why_mobile_data
+        SettingId.BLE_SCAN -> R.string.why_ble_scan
+        SettingId.NFC -> R.string.why_nfc
+        SettingId.UWB -> R.string.why_uwb
+        SettingId.SCREEN_LOCK -> R.string.why_screen_lock
+        SettingId.ENCRYPTION -> R.string.why_encryption
+        SettingId.DEVELOPER_OPTIONS -> R.string.why_developer_options
+        SettingId.LOCKSCREEN_NOTIFICATIONS -> R.string.why_lockscreen_notifications
+        SettingId.SECURITY_PATCH -> R.string.why_security_patch
+        SettingId.BIOMETRICS -> R.string.why_biometrics
+        SettingId.LOCK_DELAY -> R.string.why_lock_delay
+        SettingId.ADVANCED_PROTECTION -> R.string.why_advanced_protection
+        SettingId.DEVICE_NAME -> R.string.why_device_name
+        SettingId.VOICE_ASSISTANT -> R.string.why_voice_assistant
     }
 }
 

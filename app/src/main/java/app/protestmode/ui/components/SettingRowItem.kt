@@ -32,6 +32,7 @@ import app.protestmode.ui.a11yRes
 import app.protestmode.ui.stateRes
 import app.protestmode.ui.theme.LocalStatusColors
 import app.protestmode.ui.verdictRes
+import app.protestmode.ui.whyRes
 
 @Composable
 fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, modifier: Modifier = Modifier) {
@@ -40,10 +41,9 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
     val state = stringResource(row.stateRes())
     val verdict = stringResource(row.verdictRes())
     val risk = stringResource(row.id.risk.a11yRes())
-    val instruction = setting.instructionRes?.takeUnless { row.isProtected }?.let { stringResource(it) }
+    val why = row.whyRes()?.let { stringResource(it) }
     val description =
-        listOfNotNull(stringResource(R.string.setting_row_a11y, title, state, verdict), risk, row.detail, instruction)
-            .joinToString(", ")
+        listOfNotNull(stringResource(R.string.setting_row_a11y, title, state, verdict), risk, why).joinToString(", ")
     Column(modifier.fillMaxWidth()) {
         Row(
             modifier =
@@ -64,17 +64,17 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     StatusPill(row)
-                    Text("$state · $verdict", style = MaterialTheme.typography.bodyMedium)
+                    // A protected setting shows its state next to the green check; any other one only shows
+                    // what to do. Screen readers hear both, through the row description.
+                    Text(if (row.isProtected) state else verdict, style = MaterialTheme.typography.bodyMedium)
                 }
-                row.detail?.let {
+                // Only a setting to change gets a line: why it is a risk. The steps are in its dialog.
+                why?.let {
                     Text(
                         it,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                }
-                instruction?.let {
-                    Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
                 }
             }
             RiskBadge(row.id.risk, active = !row.isProtected)

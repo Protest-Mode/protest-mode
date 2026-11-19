@@ -11,6 +11,7 @@ object NfcSetting : Setting {
     override val id = SettingId.NFC
     override val titleRes = R.string.setting_nfc
     override val iconRes = R.drawable.ic_nfc
+    override val instructionRes = R.string.instruction_nfc
 
     override fun isAvailable(context: Context) =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC) && adapter(context) != null

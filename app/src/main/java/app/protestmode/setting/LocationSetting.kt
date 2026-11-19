@@ -11,6 +11,7 @@ object LocationSetting : Setting {
     override val id = SettingId.LOCATION
     override val titleRes = R.string.setting_location
     override val iconRes = R.drawable.ic_location
+    override val instructionRes = R.string.instruction_location
 
     @Suppress("DEPRECATION")
     override val observedUris = listOf(secureUri(Settings.Secure.LOCATION_MODE))

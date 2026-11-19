@@ -14,6 +14,7 @@ object MobileDataSetting : Setting {
     override val id = SettingId.MOBILE_DATA
     override val titleRes = R.string.setting_mobile_data
     override val iconRes = R.drawable.ic_mobile_data
+    override val instructionRes = R.string.instruction_mobile_data
     override val observedUris = listOf(globalUri(HiddenKeys.MOBILE_DATA), globalUri(Settings.Global.AIRPLANE_MODE_ON))
 
     override fun isAvailable(context: Context): Boolean {

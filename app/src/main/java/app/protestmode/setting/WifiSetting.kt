@@ -11,6 +11,7 @@ object WifiSetting : Setting {
     override val id = SettingId.WIFI
     override val titleRes = R.string.setting_wifi
     override val iconRes = R.drawable.ic_wifi
+    override val instructionRes = R.string.instruction_wifi
     override val observedUris = listOf(globalUri(HiddenKeys.WIFI_ON))
 
     override fun isAvailable(context: Context) =

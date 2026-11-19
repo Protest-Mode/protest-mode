@@ -20,6 +20,7 @@ class SettingSourceTest {
     ) : Setting {
         override val titleRes = R.string.setting_wifi
         override val iconRes = R.drawable.ic_wifi
+        override val instructionRes = R.string.instruction_wifi
 
         override fun isAvailable(context: Context) = available()
 
