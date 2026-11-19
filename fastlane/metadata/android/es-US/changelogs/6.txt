@@ -1,0 +1,1 @@
+Novedad: envía comentarios por correo desde la barra superior. Tras un fallo, la aplicación propone enviar el informe de error por correo; no se envía nada sin tu elección.

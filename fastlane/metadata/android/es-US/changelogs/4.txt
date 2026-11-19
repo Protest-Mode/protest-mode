@@ -1,0 +1,1 @@
+La búsqueda de redes Wi-Fi y de dispositivos Bluetooth y las notificaciones en la pantalla bloqueada abren ahora la pantalla de configuración adecuada según la versión de Android y la marca del celular, con instrucciones adaptadas.

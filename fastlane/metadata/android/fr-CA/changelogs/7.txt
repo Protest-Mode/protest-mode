@@ -1,0 +1,1 @@
+Nouveau : changez l'icône et le nom de l'app pour la dissimuler dans votre téléphone (météo, horloge, calculatrice, lampe torche ou boussole). Après cette mise à jour, il peut être nécessaire de rajouter l'icône sur l'écran d'accueil.

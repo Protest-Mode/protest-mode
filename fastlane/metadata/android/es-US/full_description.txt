@@ -1,0 +1,31 @@
+¿Vas a una marcha, una protesta o una manifestación? Tu celular puede revelar dónde estás, quién eres y lo que contiene. Con Modo Mani, revisa en pocos segundos la configuración de privacidad y seguridad de tu celular Android y corrígela antes de salir.
+
+<b>Tu protección de un vistazo</b>
+Expuesto, Parcialmente protegido o Discreto: descubre al instante en qué punto estás. Para cada opción, identifica los riesgos y cómo corregirlos. Filtra según lo que quieras proteger: tu ubicación, tu identidad, tu historial de actividad o el contenido de tu celular.
+
+<b>Qué revisas</b>
+• Rastreo de la ubicación: modo avión, ubicación, Wi-Fi, Bluetooth, datos móviles, NFC, hotspot, banda ultraancha (UWB), búsqueda de redes Wi-Fi y dispositivos Bluetooth en segundo plano
+• Seguridad si te quitan el celular: bloqueo de pantalla, encriptación del almacenamiento, desbloqueo con huella digital y con el rostro, tiempo antes del bloqueo, notificaciones en la pantalla bloqueada, opciones para desarrolladores y depuración por USB, actualizaciones de seguridad, Protección avanzada
+• Anonimato: el nombre del dispositivo que ven los celulares cercanos, el micrófono del asistente de voz
+
+<b>Acceso directo a la configuración</b>
+Abre directamente la pantalla de configuración adecuada, con los pasos para tu versión de Android.
+
+<b>Tú tienes el control</b>
+Tú decides cada cambio: nada se modifica a tus espaldas. La app no toca tu celular: analiza tu configuración y te explica cómo mejorarla.
+
+<b>Un ícono discreto</b>
+Dale a la app un ícono y un nombre genéricos para ocultarla en tu celular. Su vista previa en las apps recientes también queda oculta.
+
+<b>Privada por diseño</b>
+• Sin permiso de Internet: tus datos nunca salen de tu celular
+• Sin cuenta, sin anuncios, sin rastreadores, sin recopilación de datos
+• Software libre y de código abierto (GPL-3.0), con el código público
+• Funciona sin los servicios de Google Play, también en celulares Android sin Google
+• Ligera y estable
+• Compatible con dispositivos muy antiguos
+
+<b>Para quién</b>
+Manifestantes, activistas, periodistas, observadores de derechos humanos, brigadistas de salud y cualquier persona que quiera un celular más privado antes de una marcha, una movilización o una reunión delicada.
+
+Ninguna app hace que un celular sea imposible de rastrear: con Modo Mani, reduce los riesgos. El celular más seguro en una marcha sigue siendo el que dejas en casa.

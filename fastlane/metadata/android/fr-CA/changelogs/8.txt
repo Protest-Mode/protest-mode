@@ -1,0 +1,1 @@
+Corrections de bugs et meilleure stabilité, code optimisé, et une app plus légère : environ 12 % plus petite.
