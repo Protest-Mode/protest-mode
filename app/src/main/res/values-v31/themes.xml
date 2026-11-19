@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The launch screen takes the yellow of the icon, so the round mask Android applies to the icon
+         does not show. The icon itself is left to the system: a disguise shows its own icon there. -->
+    <style name="Theme.ProtestMode" parent="Base.Theme.ProtestMode">
+        <item name="android:windowSplashScreenBackground">@color/launcher_background</item>
+    </style>
+</resources>
