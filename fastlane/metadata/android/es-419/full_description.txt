@@ -1,4 +1,4 @@
-¿Vas a una marcha, una protesta o una manifestación? Tu celular puede revelar dónde estás, quién eres y lo que contiene. Con Modo Mani, revisa en pocos segundos la configuración de privacidad y seguridad de tu celular Android y corrígela antes de salir.
+¿Vas a una marcha, una protesta o una manifestación? Tu celular puede revelar dónde estás, quién eres y lo que contiene. Con Modo Protesta, revisa en pocos segundos la configuración de privacidad y seguridad de tu celular Android y corrígela antes de salir.
 
 <b>Tu protección de un vistazo</b>
 Expuesto, Parcialmente protegido o Discreto: descubre al instante en qué punto estás. Para cada opción, identifica los riesgos y cómo corregirlos. Filtra según lo que quieras proteger: tu ubicación, tu identidad, tu historial de actividad o el contenido de tu celular.
@@ -28,4 +28,4 @@ Dale a la app un ícono y un nombre genéricos para ocultarla en tu celular. Su 
 <b>Para quién</b>
 Manifestantes, activistas, periodistas, observadores de derechos humanos, brigadistas de salud y cualquier persona que quiera un celular más privado antes de una marcha, una movilización o una reunión delicada.
 
-Ninguna app hace que un celular sea imposible de rastrear: con Modo Mani, reduce los riesgos. El celular más seguro en una marcha sigue siendo el que dejas en casa.
+Ninguna app hace que un celular sea imposible de rastrear: con Modo Protesta, reduce los riesgos. El celular más seguro en una marcha sigue siendo el que dejas en casa.
