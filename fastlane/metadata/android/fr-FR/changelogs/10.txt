@@ -1,0 +1,1 @@
+Clarification des paramètres et des différents indicateurs de l'app. Optimisation des performances et de la stabilité. Ajout d'une présentation de l'application après installation.

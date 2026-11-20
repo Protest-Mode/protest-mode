@@ -1,0 +1,1 @@
+Clearer settings and indicators throughout the app. Better performance and stability. A short tour of the app after installation.
