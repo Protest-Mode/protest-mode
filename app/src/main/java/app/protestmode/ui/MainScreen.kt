@@ -50,7 +50,7 @@ data class MainActions(
 )
 
 /** One item of the list each: the list index of a setting is its index here. */
-private sealed interface ListEntry {
+internal sealed interface ListEntry {
     data object Banner : ListEntry
 
     data object Labels : ListEntry
@@ -62,7 +62,7 @@ private sealed interface ListEntry {
     data class End(val category: SettingCategory) : ListEntry
 }
 
-private fun listEntries(rows: List<SettingRow>): List<ListEntry> = buildList {
+internal fun listEntries(rows: List<SettingRow>): List<ListEntry> = buildList {
     add(ListEntry.Banner)
     add(ListEntry.Labels)
     rows.groupBy { it.id.category }.forEach { (category, group) ->
@@ -70,6 +70,15 @@ private fun listEntries(rows: List<SettingRow>): List<ListEntry> = buildList {
         group.forEachIndexed { index, row -> add(ListEntry.Setting(row, index, group.lastIndex)) }
         add(ListEntry.End(category))
     }
+}
+
+/** Index of the first setting to change, the target of the tour; null when every setting is protected. */
+internal fun List<ListEntry>.tourSetting(): Int? =
+    indexOfFirst { it is ListEntry.Setting && !it.row.isProtected }.takeIf { it >= 0 }
+
+/** Index the tour scrolls to: the header of that setting's category, as the row would end up under it. */
+internal fun List<ListEntry>.tourScroll(): Int? = tourSetting()?.let { setting ->
+    (setting downTo 0).first { this[it] is ListEntry.Header }
 }
 
 @Composable
@@ -96,11 +105,8 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
     val listColors = LocalListColors.current
     // Recomputed when the readings change, not on every frame of a scroll.
     val entries = remember(state.rows) { listEntries(state.rows) }
-    val tourSetting = remember(entries) {
-        entries.indexOfFirst { it is ListEntry.Setting && !it.row.isProtected }.takeIf { it >= 0 }
-    }
-    // Scrolled to the header of its category: the row itself would end up under the sticky header.
-    val tourScroll = tourSetting?.let { setting -> (setting downTo 0).first { entries[it] is ListEntry.Header } }
+    val tourSetting = remember(entries) { entries.tourSetting() }
+    val tourScroll = remember(entries) { entries.tourScroll() }
     val targets = tour.activeTargets
     Box {
         Scaffold(

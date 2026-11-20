@@ -1,6 +1,7 @@
 package app.protestmode
 
 import android.Manifest
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -14,6 +15,7 @@ import app.protestmode.setting.VoiceAssistantSetting
 import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -59,6 +61,17 @@ class ManifestPolicyTest {
         // The mailto query lets the feedback email find an email app.
         val unused = declaredActions() - guidedActions() - Settings.ACTION_SETTINGS - Intent.ACTION_SENDTO
         assertTrue("Unused in <queries>: $unused", unused.isEmpty())
+    }
+
+    @Test
+    fun onlyTheNeededLibraryComponentsAreKept() {
+        val pm = context.packageManager
+        val provider = ComponentName(context, "androidx.startup.InitializationProvider")
+        val initializers = pm.getProviderInfo(provider, PackageManager.GET_META_DATA).metaData.keySet()
+        assertTrue(initializers.toString(), "androidx.profileinstaller.ProfileInstallerInitializer" in initializers)
+        assertFalse(initializers.toString(), initializers.any { "EmojiCompat" in it })
+        val receiver = ComponentName(context, "androidx.profileinstaller.ProfileInstallReceiver")
+        assertTrue(runCatching { pm.getReceiverInfo(receiver, 0) }.isFailure)
     }
 
     @Test

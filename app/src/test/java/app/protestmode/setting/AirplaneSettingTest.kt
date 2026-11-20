@@ -35,8 +35,10 @@ class AirplaneSettingTest {
     }
 
     @Test
-    fun simpleToggleNeedsNoInstruction() {
+    fun hasItsOwnStepAndReason() {
         assertEquals(R.string.instruction_airplane, AirplaneSetting.instructionRes)
+        assertEquals(R.string.why_airplane, AirplaneSetting.whyRes)
+        assertEquals(R.string.target_enable, AirplaneSetting.actionRes)
     }
 
     @Test

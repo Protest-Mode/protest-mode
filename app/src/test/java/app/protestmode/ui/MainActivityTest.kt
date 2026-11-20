@@ -2,18 +2,23 @@ package app.protestmode.ui
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PermissionInfo
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.protestmode.MainActivity
 import app.protestmode.R
+import app.protestmode.feedback.FeedbackMail
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -21,6 +26,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExternalResource
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
@@ -50,6 +56,45 @@ class MainActivityTest {
     }
 
     private fun string(id: Int) = compose.activity.getString(id)
+
+    private fun openAdvanced() = compose.onNodeWithContentDescription(string(R.string.advanced_open)).performClick()
+
+    @Test
+    fun theAdvancedScreenOpensAndGoesBack() {
+        openAdvanced()
+        compose.onNodeWithText(string(R.string.advanced_title)).assertExists()
+        compose.onNodeWithContentDescription(string(R.string.action_back)).performClick()
+        compose.onNodeWithText(string(R.string.category_tracking)).assertExists()
+    }
+
+    @Test
+    fun theTourCanBeReplayedFromAdvanced() {
+        openAdvanced()
+        compose.onNodeWithText(string(R.string.advanced_tour)).performClick()
+        compose.onNodeWithText(string(R.string.walkthrough_next)).assertExists()
+        compose.onAllNodes(hasText(string(R.string.walkthrough_ask_title))).assertCountEquals(0)
+    }
+
+    @Test
+    fun contributeOpensTheProjectPageInTheBrowser() {
+        openAdvanced()
+        compose.onNodeWithText(string(R.string.advanced_contribute)).performClick()
+        val started = shadowOf(compose.activity).nextStartedActivity
+        assertEquals(Intent.ACTION_VIEW, started.action)
+        assertEquals("https://github.com/Protest-Mode/protest-mode", started.dataString)
+    }
+
+    @Test
+    fun withoutAnEmailAppTheContactAddressIsShownOnAdvanced() {
+        // Like a real phone: an intent no installed app handles cannot be started.
+        shadowOf(compose.activity.application).checkActivities(true)
+        openAdvanced()
+        compose.onNodeWithText(string(R.string.advanced_contact)).performClick()
+        compose.waitUntil(timeoutMillis = 5_000) {
+            compose.onAllNodes(hasText(FeedbackMail.SUPPORT_EMAIL, substring = true)).fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithText(string(R.string.advanced_title)).assertExists()
+    }
 
     @Test
     fun showsBannerLabelsAndList() {
