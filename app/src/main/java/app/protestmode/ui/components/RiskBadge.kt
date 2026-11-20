@@ -10,25 +10,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import app.protestmode.setting.RiskLevel
-import app.protestmode.ui.a11yRes
 import app.protestmode.ui.colors
 import app.protestmode.ui.labelRes
 
 @Composable
 fun RiskBadge(risk: RiskLevel, active: Boolean, modifier: Modifier = Modifier) {
     val (container, content) = risk.colors()
-    val description = stringResource(risk.a11yRes())
     Surface(
         shape = RoundedCornerShape(50),
         color = if (active) container else Color.Transparent,
         contentColor = if (active) content else MaterialTheme.colorScheme.outline,
         border = if (active) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-        modifier = modifier.semantics { contentDescription = description }
+        // The setting row already reads the risk out: the badge itself stays silent.
+        modifier = modifier.clearAndSetSemantics { }
     ) {
         Text(
             text = stringResource(risk.labelRes()),
