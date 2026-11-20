@@ -1,14 +1,18 @@
 package app.protestmode.ui.theme
 
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 
 @Immutable
 data class StatusColors(
@@ -125,13 +129,37 @@ private val DarkList = ListColors(screen = Color(0xFF0D0F11), card = Color(0xFF2
 
 val LocalListColors = staticCompositionLocalOf { LightList }
 
+/**
+ * From Android 12, the app takes the colours of the wallpaper, like the system settings. The status
+ * colours (exposed, partially protected, discreet) stay fixed, as they carry meaning. [dynamicColor]
+ * is turned off for the store screenshots, so that they look the same whatever the phone.
+ */
 @Composable
-fun ProtestModeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    // Dynamic colour is not used: it would tint the app after the wallpaper, differently on each phone.
-    val scheme = if (darkTheme) DarkScheme else LightScheme
+fun ProtestModeTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = true,
+    content: @Composable () -> Unit
+) {
+    val dynamic = dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+    val context = LocalContext.current
+    val scheme =
+        when {
+            dynamic && darkTheme -> dynamicDarkColorScheme(context)
+            dynamic -> dynamicLightColorScheme(context)
+            darkTheme -> DarkScheme
+            else -> LightScheme
+        }
+    val list =
+        when {
+            // The same layering as the system settings: a tinted screen, lighter cards (darker at night).
+            dynamic && darkTheme -> ListColors(screen = scheme.surface, card = scheme.surfaceContainerHigh)
+            dynamic -> ListColors(screen = scheme.surfaceContainer, card = scheme.surfaceContainerLowest)
+            darkTheme -> DarkList
+            else -> LightList
+        }
     CompositionLocalProvider(
         LocalStatusColors provides if (darkTheme) DarkStatus else LightStatus,
-        LocalListColors provides if (darkTheme) DarkList else LightList
+        LocalListColors provides list
     ) {
         MaterialTheme(colorScheme = scheme, content = content)
     }
