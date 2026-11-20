@@ -27,6 +27,7 @@ import app.protestmode.ui.SettingRow
 fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> Unit, onDismiss: () -> Unit) {
     val setting = SettingCatalog[row.id]
     val steps = stringResource(setting.instructionRes).lines().filter { it.isNotBlank() }
+    val stepsTitle = if (steps.size == 1) R.string.setting_steps_one else R.string.setting_steps_many
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(setting.titleRes)) },
@@ -47,15 +48,7 @@ fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> 
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        stringResource(
-                            if (steps.size ==
-                                1
-                            ) {
-                                R.string.setting_steps_one
-                            } else {
-                                R.string.setting_steps_many
-                            }
-                        ),
+                        stringResource(stepsTitle),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary
                     )

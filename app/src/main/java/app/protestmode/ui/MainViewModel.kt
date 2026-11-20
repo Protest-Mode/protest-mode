@@ -23,6 +23,7 @@ import app.protestmode.setting.SettingId
 import app.protestmode.setting.SettingSource
 import app.protestmode.setting.SettingState
 import app.protestmode.setting.enumByName
+import app.protestmode.ui.walkthrough.WalkthroughStore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -60,6 +61,8 @@ data class MainUiState(
     val selectedLabel: ExposureLabel? = null,
     val rows: List<SettingRow> = emptyList(),
     val pendingCrash: Boolean = false,
+    val loaded: Boolean = false,
+    val offerTour: Boolean = false,
     val disguise: Disguise = Disguise.ORIGINAL
 )
 
@@ -87,6 +90,10 @@ constructor(
     val state: StateFlow<MainUiState> = _state.asStateFlow()
 
     private var readings: Map<SettingId, Reading> = emptyMap()
+    private var loaded = false
+
+    private val tourStore = WalkthroughStore(application)
+    private var tourSeen = true
 
     private val confirmations = Confirmations(application, savedState)
 
@@ -160,7 +167,13 @@ constructor(
         publish()
     }
 
-    fun onFeedback() {
+    fun onTourDone() {
+        tourStore.markSeen()
+        tourSeen = true
+        publish()
+    }
+
+    fun onContact() {
         eventChannel.trySend(UiEvent.SendMail(FeedbackMail.feedback(context)))
     }
 
@@ -183,6 +196,8 @@ constructor(
             viewModelScope.launch {
                 if (delayMs > 0) delay(delayMs)
                 readings = withContext(readDispatcher) { source.readAll(context) }
+                if (!loaded) tourSeen = withContext(readDispatcher) { tourStore.seen() }
+                loaded = true
                 publish()
             }
     }
@@ -198,6 +213,8 @@ constructor(
                 securedLabels = exposure.securedLabels,
                 selectedLabel = label,
                 pendingCrash = crashTrace != null,
+                loaded = loaded,
+                offerTour = loaded && !tourSeen,
                 disguise = disguise,
                 rows =
                 readings

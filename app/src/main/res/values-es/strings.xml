@@ -104,14 +104,13 @@
         <item quantity="many">%1$d consejos pendientes</item>
         <item quantity="other">%1$d consejos pendientes</item>
     </plurals>
-    <string name="feedback_action">Escríbenos</string>
+    <string name="advanced_contact">Escríbenos</string>
     <string name="feedback_no_mail_app">No hay ninguna aplicación de correo. Escribe a %1$s</string>
     <string name="feedback_copy">Copiar</string>
     <string name="crash_title">Informe de error</string>
     <string name="crash_text">Se produjo un error la última vez que se abrió la aplicación. Si quieres, puedes enviarnos por correo los datos del fallo para que podamos corregirlo. El envío es opcional.</string>
     <string name="crash_send">Enviar</string>
     <string name="crash_dismiss">No enviar</string>
-    <string name="disguise_action">Cambiar el icono y el nombre de la app</string>
     <string name="disguise_title">Icono y nombre de la app</string>
     <string name="disguise_text">Puedes cambiar el aspecto de esta app para ocultarla en tu teléfono. El nombre real de la app sigue visible en los archivos y ajustes del teléfono.</string>
     <string name="disguise_apply">Aplicar</string>
@@ -191,14 +190,14 @@
     <string name="walkthrough_ask_text">¿Quieres una presentación rápida de la app? Solo lleva unos segundos.</string>
     <string name="walkthrough_ask_yes">Sí, muéstramela</string>
     <string name="walkthrough_ask_no">No, gracias</string>
-    <string name="menu_more">Avanzado</string>
-    <string name="menu_hide_app">Ocultar la app</string>
-    <string name="menu_replay_tour">Ver de nuevo la presentación</string>
-    <string name="menu_contribute">Contribuir</string>
-    <string name="more_title">Avanzado</string>
-    <string name="more_back">Atrás</string>
-    <string name="more_hide_app_summary">Dale el aspecto de una app normal.</string>
-    <string name="more_tour_summary">Las partes principales de la pantalla, en 3 pasos.</string>
-    <string name="more_write_summary">Un error, una idea, una pregunta: por correo.</string>
-    <string name="more_contribute_summary">El código es libre: propón mejoras en GitHub.</string>
+    <string name="advanced_open">Avanzado</string>
+    <string name="advanced_hide">Ocultar la app</string>
+    <string name="advanced_tour">Ver de nuevo la presentación</string>
+    <string name="advanced_contribute">Contribuir</string>
+    <string name="advanced_title">Avanzado</string>
+    <string name="action_back">Atrás</string>
+    <string name="advanced_hide_summary">Dale el aspecto de una app normal.</string>
+    <string name="advanced_tour_summary">Las partes principales de la pantalla, en 3 pasos.</string>
+    <string name="advanced_contact_summary">Un error, una idea, una pregunta: por correo.</string>
+    <string name="advanced_contribute_summary">El código es libre: propón mejoras en GitHub.</string>
 </resources>

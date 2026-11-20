@@ -103,14 +103,13 @@
         <item quantity="one">%1$d piece of advice left</item>
         <item quantity="other">%1$d pieces of advice left</item>
     </plurals>
-    <string name="feedback_action">Contact us</string>
+    <string name="advanced_contact">Contact us</string>
     <string name="feedback_no_mail_app">No email app found. Write to %1$s</string>
     <string name="feedback_copy">Copy</string>
     <string name="crash_title">Error report</string>
     <string name="crash_text">An error occurred the last time the app was opened. If you wish, you can send us the crash details by email so that we can fix it. Sending is optional.</string>
     <string name="crash_send">Send</string>
     <string name="crash_dismiss">Don\'t send</string>
-    <string name="disguise_action">Change the app icon and name</string>
     <string name="disguise_title">App icon and name</string>
     <string name="disguise_text">You can change how this app looks to hide it on your phone. The app\'s real name stays visible in the phone\'s files and settings.</string>
     <string name="disguise_apply">Apply</string>
@@ -190,14 +189,14 @@
     <string name="walkthrough_ask_text">Would you like a quick tour of the app? It only takes a few seconds.</string>
     <string name="walkthrough_ask_yes">Yes, show me</string>
     <string name="walkthrough_ask_no">No thanks</string>
-    <string name="menu_more">Advanced</string>
-    <string name="menu_hide_app">Hide the app</string>
-    <string name="menu_replay_tour">Replay the tour</string>
-    <string name="menu_contribute">Contribute</string>
-    <string name="more_title">Advanced</string>
-    <string name="more_back">Back</string>
-    <string name="more_hide_app_summary">Make it look like an ordinary app.</string>
-    <string name="more_tour_summary">The main parts of the screen, in 3 steps.</string>
-    <string name="more_write_summary">A bug, an idea, a question: by email.</string>
-    <string name="more_contribute_summary">The code is free: suggest improvements on GitHub.</string>
+    <string name="advanced_open">Advanced</string>
+    <string name="advanced_hide">Hide the app</string>
+    <string name="advanced_tour">Replay the tour</string>
+    <string name="advanced_contribute">Contribute</string>
+    <string name="advanced_title">Advanced</string>
+    <string name="action_back">Back</string>
+    <string name="advanced_hide_summary">Make it look like an ordinary app.</string>
+    <string name="advanced_tour_summary">The main parts of the screen, in 3 steps.</string>
+    <string name="advanced_contact_summary">A bug, an idea, a question: by email.</string>
+    <string name="advanced_contribute_summary">The code is free: suggest improvements on GitHub.</string>
 </resources>

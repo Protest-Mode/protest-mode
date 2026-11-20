@@ -104,14 +104,13 @@
         <item quantity="many">%1$d consigli rimanenti</item>
         <item quantity="other">%1$d consigli rimanenti</item>
     </plurals>
-    <string name="feedback_action">Scrivici</string>
+    <string name="advanced_contact">Scrivici</string>
     <string name="feedback_no_mail_app">Nessuna app email trovata. Scrivi a %1$s</string>
     <string name="feedback_copy">Copia</string>
     <string name="crash_title">Segnalazione di errore</string>
     <string name="crash_text">Si è verificato un errore all\'ultima apertura dell\'app. Se vuoi, puoi inviarci via email le informazioni sull\'arresto anomalo, così potremo correggerlo. L\'invio è facoltativo.</string>
     <string name="crash_send">Invia</string>
     <string name="crash_dismiss">Non inviare</string>
-    <string name="disguise_action">Cambia icona e nome dell\'app</string>
     <string name="disguise_title">Icona e nome dell\'app</string>
     <string name="disguise_text">Puoi cambiare l\'aspetto di questa app per nasconderla nel telefono. Il nome reale dell\'app resta visibile nei file e nelle impostazioni del telefono.</string>
     <string name="disguise_apply">Applica</string>
@@ -191,14 +190,14 @@
     <string name="walkthrough_ask_text">Vuoi una breve presentazione dell\'app? Richiede solo pochi secondi.</string>
     <string name="walkthrough_ask_yes">Sì, mostrami</string>
     <string name="walkthrough_ask_no">No, grazie</string>
-    <string name="menu_more">Avanzate</string>
-    <string name="menu_hide_app">Nascondi l\'app</string>
-    <string name="menu_replay_tour">Rivedi la presentazione</string>
-    <string name="menu_contribute">Contribuisci</string>
-    <string name="more_title">Avanzate</string>
-    <string name="more_back">Indietro</string>
-    <string name="more_hide_app_summary">Dalle l\'aspetto di un\'app qualsiasi.</string>
-    <string name="more_tour_summary">Le parti principali dello schermo, in 3 passaggi.</string>
-    <string name="more_write_summary">Un bug, un\'idea, una domanda: via email.</string>
-    <string name="more_contribute_summary">Il codice è libero: proponi miglioramenti su GitHub.</string>
+    <string name="advanced_open">Avanzate</string>
+    <string name="advanced_hide">Nascondi l\'app</string>
+    <string name="advanced_tour">Rivedi la presentazione</string>
+    <string name="advanced_contribute">Contribuisci</string>
+    <string name="advanced_title">Avanzate</string>
+    <string name="action_back">Indietro</string>
+    <string name="advanced_hide_summary">Dalle l\'aspetto di un\'app qualsiasi.</string>
+    <string name="advanced_tour_summary">Le parti principali dello schermo, in 3 passaggi.</string>
+    <string name="advanced_contact_summary">Un bug, un\'idea, una domanda: via email.</string>
+    <string name="advanced_contribute_summary">Il codice è libero: proponi miglioramenti su GitHub.</string>
 </resources>

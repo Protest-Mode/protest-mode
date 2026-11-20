@@ -64,6 +64,21 @@ class MainViewModelTest {
         runBlocking { withTimeout(1_000) { events.first() } }.let { (it as UiEvent.OpenScreen).intent }
 
     @Test
+    fun loadedOnceTheSettingsAreRead() {
+        assertTrue(viewModel().state.value.loaded)
+        assertFalse(MainUiState().loaded)
+    }
+
+    @Test
+    fun offersTheTourUntilItIsDone() {
+        val vm = viewModel()
+        assertTrue(vm.state.value.offerTour)
+        vm.onTourDone()
+        assertFalse(vm.state.value.offerTour)
+        assertFalse(viewModel().state.value.offerTour)
+    }
+
+    @Test
     fun listsEveryAvailableSettingInTheFixedOrder() {
         val ids = viewModel().state.value.rows.map { it.id }
 
@@ -203,7 +218,7 @@ class MainViewModelTest {
     @Test
     fun feedbackOpensAnEmail() {
         val vm = viewModel()
-        vm.onFeedback()
+        vm.onContact()
         assertTrue(vm.nextMail().getStringExtra(android.content.Intent.EXTRA_SUBJECT)!!.contains("Feedback"))
     }
 
