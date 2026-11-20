@@ -11,6 +11,7 @@ object HotspotSetting : Setting {
     override val id = SettingId.HOTSPOT
     override val titleRes = R.string.setting_hotspot
     override val iconRes = R.drawable.ic_hotspot
+    override val whyRes = R.string.why_hotspot
     override val instructionRes = R.string.instruction_hotspot
 
     override fun isAvailable(context: Context) = context.packageManager.hasSystemFeature(PackageManager.FEATURE_WIFI)

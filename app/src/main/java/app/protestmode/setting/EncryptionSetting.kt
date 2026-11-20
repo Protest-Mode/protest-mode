@@ -10,6 +10,7 @@ object EncryptionSetting : Setting {
     override val id = SettingId.ENCRYPTION
     override val titleRes = R.string.setting_encryption
     override val iconRes = R.drawable.ic_key
+    override val whyRes = R.string.why_encryption
     override val instructionRes = R.string.instruction_encryption
     override val onLabelRes = R.string.state_encrypted
     override val offLabelRes = R.string.state_not_encrypted

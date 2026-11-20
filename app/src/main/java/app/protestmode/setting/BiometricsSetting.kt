@@ -13,6 +13,8 @@ object BiometricsSetting : Setting {
     override val id = SettingId.BIOMETRICS
     override val titleRes = R.string.setting_biometrics
     override val iconRes = R.drawable.ic_fingerprint
+    override val whyRes = R.string.why_biometrics
+    override val actionRes = R.string.target_remove
     override val instructionRes = R.string.instruction_biometrics
     override val onLabelRes = R.string.state_enrolled
     override val offLabelRes = R.string.state_none

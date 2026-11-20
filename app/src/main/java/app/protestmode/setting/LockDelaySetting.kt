@@ -20,6 +20,8 @@ object LockDelaySetting : Setting {
     override val id = SettingId.LOCK_DELAY
     override val titleRes = R.string.setting_lock_delay
     override val iconRes = R.drawable.ic_timer
+    override val whyRes = R.string.why_lock_delay
+    override val actionRes = R.string.target_shorten
     override val instructionRes = R.string.instruction_lock_delay
     override val onLabelRes = R.string.state_too_long
     override val offLabelRes = R.string.state_short

@@ -9,6 +9,8 @@ object LockscreenNotificationsSetting : Setting {
     override val id = SettingId.LOCKSCREEN_NOTIFICATIONS
     override val titleRes = R.string.setting_lockscreen_notifications
     override val iconRes = R.drawable.ic_notifications
+    override val whyRes = R.string.why_lockscreen_notifications
+    override val actionRes = R.string.target_hide
     override val instructionRes
         get() = when {
             VendorSkin.matches() -> R.string.instruction_lockscreen_notifications_vendor

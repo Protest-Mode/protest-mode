@@ -12,6 +12,7 @@ object UwbSetting : Setting {
     override val id = SettingId.UWB
     override val titleRes = R.string.setting_uwb
     override val iconRes = R.drawable.ic_uwb
+    override val whyRes = R.string.why_uwb
     override val instructionRes = R.string.instruction_uwb
 
     override fun isAvailable(context: Context) =

@@ -9,6 +9,7 @@ object DeveloperOptionsSetting : Setting {
     override val id = SettingId.DEVELOPER_OPTIONS
     override val titleRes = R.string.setting_developer_options
     override val iconRes = R.drawable.ic_code
+    override val whyRes = R.string.why_developer_options
     override val instructionRes = R.string.instruction_developer_options
     override val observedUris =
         listOf(

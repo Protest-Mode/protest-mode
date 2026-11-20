@@ -20,6 +20,8 @@ object SecurityPatchSetting : Setting {
     override val id = SettingId.SECURITY_PATCH
     override val titleRes = R.string.setting_security_patch
     override val iconRes = R.drawable.ic_system_update
+    override val whyRes = R.string.why_security_patch
+    override val actionRes = R.string.target_update
     override val instructionRes = R.string.instruction_security_patch
     override val onLabelRes = R.string.state_up_to_date
     override val offLabelRes = R.string.state_outdated

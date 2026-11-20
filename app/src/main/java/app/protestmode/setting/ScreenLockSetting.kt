@@ -11,6 +11,8 @@ object ScreenLockSetting : Setting {
     override val id = SettingId.SCREEN_LOCK
     override val titleRes = R.string.setting_screen_lock
     override val iconRes = R.drawable.ic_lock
+    override val whyRes = R.string.why_screen_lock
+    override val actionRes = R.string.target_secure
     override val instructionRes = R.string.instruction_screen_lock
     override val onLabelRes = R.string.state_secure
     override val offLabelRes = R.string.state_not_secure

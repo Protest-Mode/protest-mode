@@ -12,6 +12,7 @@ object AdvancedProtectionSetting : Setting {
     override val id = SettingId.ADVANCED_PROTECTION
     override val titleRes = R.string.setting_advanced_protection
     override val iconRes = R.drawable.ic_shield
+    override val whyRes = R.string.why_advanced_protection
     override val instructionRes = R.string.instruction_advanced_protection
 
     override fun isAvailable(context: Context) = manager(context) != null

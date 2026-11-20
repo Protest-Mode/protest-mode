@@ -14,6 +14,8 @@ object DeviceNameSetting : Setting {
     override val id = SettingId.DEVICE_NAME
     override val titleRes = R.string.setting_device_name
     override val iconRes = R.drawable.ic_smartphone
+    override val whyRes = R.string.why_device_name
+    override val actionRes = R.string.target_change
     override val instructionRes = R.string.instruction_device_name
     override val onLabelRes = R.string.state_personal
     override val offLabelRes = R.string.state_generic

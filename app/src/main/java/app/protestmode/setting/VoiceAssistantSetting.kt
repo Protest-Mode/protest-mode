@@ -21,6 +21,8 @@ object VoiceAssistantSetting : Setting {
     override val id = SettingId.VOICE_ASSISTANT
     override val titleRes = R.string.setting_voice_assistant
     override val iconRes = R.drawable.ic_mic
+    override val whyRes = R.string.why_voice_assistant
+    override val actionRes = R.string.target_block
     override val instructionRes = R.string.instruction_voice_assistant
     override val onLabelRes = R.string.state_mic_allowed
     override val offLabelRes = R.string.state_mic_blocked

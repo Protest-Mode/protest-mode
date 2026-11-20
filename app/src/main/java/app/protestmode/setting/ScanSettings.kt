@@ -32,6 +32,7 @@ object WifiScanSetting : Setting {
     override val id = SettingId.WIFI_SCAN
     override val titleRes = R.string.setting_wifi_scan
     override val iconRes = R.drawable.ic_wifi_scan
+    override val whyRes = R.string.why_wifi_scan
     override val instructionRes
         get() = ScanScreens.instruction(
             R.string.instruction_wifi_scan_menu,
@@ -61,6 +62,7 @@ object BleScanSetting : Setting {
     override val id = SettingId.BLE_SCAN
     override val titleRes = R.string.setting_ble_scan
     override val iconRes = R.drawable.ic_ble_scan
+    override val whyRes = R.string.why_ble_scan
     override val instructionRes
         get() = ScanScreens.instruction(
             R.string.instruction_ble_scan_menu,

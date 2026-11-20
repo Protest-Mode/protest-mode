@@ -91,6 +91,12 @@ interface Setting {
     /** Steps shown in the setting's dialog, one per line. */
     @get:StringRes val instructionRes: Int
 
+    /** Why the setting is a risk while it is not protected. */
+    @get:StringRes val whyRes: Int
+
+    /** What to do while it is not protected, without repeating the state. */
+    @get:StringRes val actionRes: Int get() = if (id.desiredEnabled) R.string.target_enable else R.string.target_disable
+
     @get:StringRes val onLabelRes: Int get() = R.string.setting_state_on
 
     @get:StringRes val offLabelRes: Int get() = R.string.setting_state_off

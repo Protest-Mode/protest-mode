@@ -14,6 +14,7 @@ object BluetoothSetting : Setting {
     override val id = SettingId.BLUETOOTH
     override val titleRes = R.string.setting_bluetooth
     override val iconRes = R.drawable.ic_bluetooth
+    override val whyRes = R.string.why_bluetooth
     override val instructionRes = R.string.instruction_bluetooth
     override val observedUris = listOf(globalUri(Settings.Global.BLUETOOTH_ON))
 
