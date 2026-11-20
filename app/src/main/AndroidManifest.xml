@@ -214,9 +214,8 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- Library initializers that are not needed are removed. EmojiCompat would ask an external font
-             provider (Google Play services) for an emoji font at every launch; ProfileInstaller writes
-             startup profiles and exposes a receiver. -->
+        <!-- EmojiCompat would fetch an emoji font from Google Play services at every launch. ProfileInstaller
+             stays for ahead-of-time compilation outside Google Play, without its benchmark receiver. -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
@@ -225,9 +224,6 @@
             tools:node="merge">
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
-                tools:node="remove" />
-            <meta-data
-                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 tools:node="remove" />
         </provider>
         <receiver

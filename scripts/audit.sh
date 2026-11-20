@@ -38,8 +38,8 @@ print -r -- "$components" | while read -r component; do
         *) error "Unexpected component: $component"; failed=1 ;;
     esac
 done
-if print -r -- "$manifest" | grep -q "EmojiCompatInitializer\|ProfileInstaller"; then
-    error "Removed library initializers are back"
+if print -r -- "$manifest" | grep -q "EmojiCompatInitializer\|ProfileInstallReceiver"; then
+    error "Removed library components are back"
     failed=1
 fi
 

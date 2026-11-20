@@ -107,8 +107,9 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
     val context = LocalContext.current
     val store = remember { WalkthroughStore(context) }
     val targets = remember { WalkthroughTargets() }
-    val groups = state.rows.groupBy { it.id.category }
-    val firstToChange = state.rows.firstOrNull { !it.isProtected }
+    // Recomputed when the readings change, not on every frame of a scroll.
+    val groups = remember(state.rows) { state.rows.groupBy { it.id.category } }
+    val firstToChange = remember(state.rows) { state.rows.firstOrNull { !it.isProtected } }
     val tourSteps = WalkStep.entries.filter { it != WalkStep.SETTING || firstToChange != null }
     // OFFER: the app asks first; DONE: declined, skipped or finished; otherwise the index of the step.
     var tourStep by rememberSaveable { mutableIntStateOf(if (store.seen()) TOUR_DONE else TOUR_OFFER) }
@@ -146,7 +147,8 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
         )
         return
     }
-    CompositionLocalProvider(LocalWalkthroughTargets provides targets) {
+    // Targets only report their position during the tour: no work while the list scrolls otherwise.
+    CompositionLocalProvider(LocalWalkthroughTargets provides targets.takeIf { touring }) {
         Box {
             Scaffold(
                 containerColor = listColors.screen,
@@ -178,14 +180,14 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                 }
             ) { padding ->
                 LazyColumn(state = listState, modifier = Modifier.padding(padding)) {
-                    item(key = "banner") {
+                    item(key = "banner", contentType = "banner") {
                         StatusBanner(
                             state.exposure,
                             state.remainingAdvice,
                             Modifier.padding(horizontal = 16.dp).walkthroughTarget(WalkStep.BANNER)
                         )
                     }
-                    item(key = "labels") {
+                    item(key = "labels", contentType = "labels") {
                         SecuredLabels(
                             secured = state.securedLabels,
                             selected = state.selectedLabel,
@@ -198,11 +200,13 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                         )
                     }
                     groups.forEach { (category, rows) ->
-                        stickyHeader(key = "category_${category.name}") {
+                        stickyHeader(key = "category_${category.name}", contentType = "header") {
                             CategoryHeader(category, protectedCount = rows.count { it.isProtected }, total = rows.size)
                         }
                         // One card per setting, the cards of a category forming one rounded group, as in the system settings.
-                        itemsIndexed(rows, key = { _, row -> row.id.name }) { index, row ->
+                        itemsIndexed(rows, key = { _, row ->
+                            row.id.name
+                        }, contentType = { _, _ -> "setting" }) { index, row ->
                             val outer = 20.dp
                             val inner = 4.dp
                             val shape =
@@ -232,7 +236,7 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                                     )
                             )
                         }
-                        item(key = "category_end_${category.name}") { Spacer(Modifier.height(12.dp)) }
+                        item(key = "category_end_${category.name}", contentType = "spacer") { Spacer(Modifier.height(12.dp)) }
                     }
                 }
             }
