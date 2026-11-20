@@ -23,7 +23,6 @@ import app.protestmode.setting.SettingCatalog
 import app.protestmode.ui.RowStatus
 import app.protestmode.ui.SettingRow
 
-/** What to change by hand for a setting that is not protected, then a shortcut to the right screen. */
 @Composable
 fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> Unit, onDismiss: () -> Unit) {
     val setting = SettingCatalog[row.id]
@@ -32,7 +31,6 @@ fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> 
         onDismissRequest = onDismiss,
         title = { Text(stringResource(setting.titleRes)) },
         text = {
-            // The card already says why: the dialog only gives what was read and what to do.
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 row.detail?.let {
                     Text(
@@ -61,7 +59,6 @@ fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> 
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.primary
                     )
-                    // Several steps are numbered, as they are done in that order.
                     steps.forEachIndexed { index, step ->
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             if (steps.size > 1) {
@@ -82,7 +79,6 @@ fun SettingDialog(row: SettingRow, onOpenSettings: () -> Unit, onConfirm: () -> 
                 }
             }
         },
-        // The way out that matters is a filled button; closing stays a text button.
         confirmButton = { Button(onClick = onOpenSettings) { Text(stringResource(R.string.action_open_settings)) } },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_close)) } }
     )

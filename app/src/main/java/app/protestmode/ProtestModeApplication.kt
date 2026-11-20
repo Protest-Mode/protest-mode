@@ -8,7 +8,6 @@ class ProtestModeApplication : Application() {
         super.onCreate()
         val store = CrashStore(this)
         val previous = Thread.getDefaultUncaughtExceptionHandler()
-        // The report is only kept on the phone; the previous handler still ends the process as usual.
         Thread.setDefaultUncaughtExceptionHandler { thread, error ->
             store.record(error)
             previous?.uncaughtException(thread, error)

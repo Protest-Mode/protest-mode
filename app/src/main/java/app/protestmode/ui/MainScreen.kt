@@ -55,7 +55,6 @@ import app.protestmode.ui.walkthrough.WalkthroughStore
 import app.protestmode.ui.walkthrough.WalkthroughTargets
 import app.protestmode.ui.walkthrough.walkthroughTarget
 
-/** What the screen can ask for; built once from the ViewModel. */
 data class MainActions(
     val onRowClick: (SettingRow) -> Unit,
     val onConfirm: (SettingId) -> Unit,
@@ -82,7 +81,6 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
             onCancel = { choosingDisguise = false }
         )
     }
-    // A protected setting opens its screen at once; any other one first explains what to change.
     var detailFor by rememberSaveable { mutableStateOf<String?>(null) }
     state.rows.firstOrNull { it.id.name == detailFor }?.let { row ->
         SettingDialog(
@@ -102,8 +100,6 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
         CrashDialog(actions.onSendCrash, actions.onDismissCrash)
     }
     val listState = rememberLazyListState()
-    // First launch: a short tour over the real screen. The setting step points at the first setting to
-    // change, and is left out when there is none.
     val context = LocalContext.current
     val store = remember { WalkthroughStore(context) }
     val targets = remember { WalkthroughTargets() }
@@ -114,7 +110,6 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
     // OFFER: the app asks first; DONE: declined, skipped or finished; otherwise the index of the step.
     var tourStep by rememberSaveable { mutableIntStateOf(if (store.seen()) TOUR_DONE else TOUR_OFFER) }
     val touring = tourStep in tourSteps.indices && state.rows.isNotEmpty()
-    // Brings the target of the step into view: the top of the list, or the category of the setting.
     LaunchedEffect(tourStep, touring) {
         if (!touring) return@LaunchedEffect
         when (tourSteps[tourStep]) {
@@ -167,7 +162,6 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                                 fontWeight = FontWeight.Bold
                             )
                         },
-                        // One entry point for everything besides the checks.
                         actions = {
                             IconButton(onClick = { showMore = true }) {
                                 Icon(
@@ -203,7 +197,6 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                         stickyHeader(key = "category_${category.name}", contentType = "header") {
                             CategoryHeader(category, protectedCount = rows.count { it.isProtected }, total = rows.size)
                         }
-                        // One card per setting, the cards of a category forming one rounded group, as in the system settings.
                         itemsIndexed(rows, key = { _, row ->
                             row.id.name
                         }, contentType = { _, _ -> "setting" }) { index, row ->
@@ -236,7 +229,9 @@ fun MainScreen(state: MainUiState, snackbar: SnackbarHostState, actions: MainAct
                                     )
                             )
                         }
-                        item(key = "category_end_${category.name}", contentType = "spacer") { Spacer(Modifier.height(12.dp)) }
+                        item(key = "category_end_${category.name}", contentType = "spacer") {
+                            Spacer(Modifier.height(12.dp))
+                        }
                     }
                 }
             }

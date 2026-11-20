@@ -6,7 +6,6 @@ import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 
-/** Carries the disguise into recent apps: its name and icon, and a hidden preview of the screen. */
 object DisguiseWindow {
     @Suppress("DEPRECATION")
     fun apply(activity: Activity, disguise: Disguise) {

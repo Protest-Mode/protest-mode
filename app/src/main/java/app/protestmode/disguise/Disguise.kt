@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import app.protestmode.R
 
-/** How the app appears in the launcher and in recent apps. Each entry matches an activity-alias of the manifest. */
+/** Each entry matches an activity-alias of the manifest. */
 enum class Disguise(val alias: String, @param:StringRes val labelRes: Int, @param:DrawableRes val iconRes: Int?) {
     ORIGINAL("LauncherOriginal", R.string.app_name, null),
     WEATHER("LauncherWeather", R.string.disguise_weather, R.drawable.disguise_weather),

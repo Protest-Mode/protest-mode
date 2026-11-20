@@ -21,7 +21,6 @@ object DeveloperOptionsSetting : Setting {
         val resolver = probe.context.contentResolver
         val developer = SettingsReader.global(resolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED)
         val adb = SettingsReader.global(resolver, Settings.Global.ADB_ENABLED)
-        // Wireless debugging (API 30+) uses a hidden Settings.Global key.
         val adbWifi = SettingsReader.global(resolver, HiddenKeys.ADB_WIFI_ENABLED)
         val detail =
             when {

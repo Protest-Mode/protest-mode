@@ -121,7 +121,6 @@ private val DarkScheme =
 
 val LocalStatusColors = staticCompositionLocalOf { LightStatus }
 
-/** Like the system settings: a tinted screen with the settings on lighter cards (darker cards at night). */
 data class ListColors(val screen: Color, val card: Color)
 
 private val LightList = ListColors(screen = Color(0xFFEBEDEF), card = Color.White)
@@ -129,11 +128,7 @@ private val DarkList = ListColors(screen = Color(0xFF0D0F11), card = Color(0xFF2
 
 val LocalListColors = staticCompositionLocalOf { LightList }
 
-/**
- * From Android 12, the app takes the colours of the wallpaper, like the system settings. The status
- * colours (exposed, partially protected, discreet) stay fixed, as they carry meaning. [dynamicColor]
- * is turned off for the store screenshots, so that they look the same whatever the phone.
- */
+/** The status colours stay fixed, as they carry meaning. Store screenshots turn [dynamicColor] off. */
 @Composable
 fun ProtestModeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -151,7 +146,6 @@ fun ProtestModeTheme(
         }
     val list =
         when {
-            // The same layering as the system settings: a tinted screen, lighter cards (darker at night).
             dynamic && darkTheme -> ListColors(screen = scheme.surface, card = scheme.surfaceContainerHigh)
             dynamic -> ListColors(screen = scheme.surfaceContainer, card = scheme.surfaceContainerLowest)
             darkTheme -> DarkList

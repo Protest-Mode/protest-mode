@@ -26,7 +26,6 @@ fun RiskBadge(risk: RiskLevel, active: Boolean, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(50),
         color = if (active) container else Color.Transparent,
-        // Once the setting is protected, its risk stays a badge but a quiet one: pale frame, light text.
         contentColor = if (active) content else MaterialTheme.colorScheme.outline,
         border = if (active) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
         modifier = modifier.semantics { contentDescription = description }

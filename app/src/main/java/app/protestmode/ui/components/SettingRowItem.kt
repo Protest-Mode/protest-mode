@@ -64,11 +64,9 @@ fun SettingRowItem(row: SettingRow, onClick: () -> Unit, onConfirm: () -> Unit, 
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     StatusPill(row)
-                    // A protected setting shows its state next to the green check; any other one only shows
-                    // what to do. Screen readers hear both, through the row description.
+                    // Screen readers hear both the state and the action, through the row description.
                     Text(if (row.isProtected) state else verdict, style = MaterialTheme.typography.bodyMedium)
                 }
-                // Only a setting to change gets a line: why it is a risk. The steps are in its dialog.
                 why?.let {
                     Text(
                         it,

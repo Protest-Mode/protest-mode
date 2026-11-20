@@ -47,12 +47,9 @@ data class SettingRow(val id: SettingId, val state: SettingState, val confirmed:
     val isProtected get() = status == RowStatus.PROTECTED
 }
 
-/** One-off actions the screen carries out on behalf of the ViewModel. */
 sealed interface UiEvent {
-    /** A system screen that guides the user to protect a setting. */
     data class OpenScreen(val intent: Intent) : UiEvent
 
-    /** An email to open in the user's email app. */
     data class SendMail(val intent: Intent) : UiEvent
 }
 
@@ -62,7 +59,6 @@ data class MainUiState(
     val securedLabels: Set<ExposureLabel> = emptySet(),
     val selectedLabel: ExposureLabel? = null,
     val rows: List<SettingRow> = emptyList(),
-    /** A crash report from the previous run waits for the user's decision. */
     val pendingCrash: Boolean = false,
     val disguise: Disguise = Disguise.ORIGINAL
 )

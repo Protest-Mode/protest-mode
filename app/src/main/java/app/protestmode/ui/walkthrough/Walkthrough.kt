@@ -66,14 +66,12 @@ import app.protestmode.ui.color
 import app.protestmode.ui.descriptionRes
 import app.protestmode.ui.titleRes
 
-/** The parts of the screen the first-launch tour points at, in order. */
 enum class WalkStep(@StringRes val textRes: Int) {
     BANNER(R.string.walkthrough_banner),
     LABELS(R.string.walkthrough_labels),
     SETTING(R.string.walkthrough_setting)
 }
 
-/** Where each target sits on screen, reported by the targets themselves as they are laid out. */
 @Stable
 class WalkthroughTargets {
     val bounds = mutableStateMapOf<WalkStep, Rect>()
@@ -81,13 +79,11 @@ class WalkthroughTargets {
 
 val LocalWalkthroughTargets = compositionLocalOf<WalkthroughTargets?> { null }
 
-/** Marks this element as the target of a step of the tour. */
 fun Modifier.walkthroughTarget(step: WalkStep): Modifier = composed {
     val targets = LocalWalkthroughTargets.current
     if (targets == null) this else onGloballyPositioned { targets.bounds[step] = it.boundsInRoot() }
 }
 
-/** Remembers that the tour was seen; nothing else is stored, and nothing leaves the phone. */
 class WalkthroughStore(context: Context) {
     private val prefs = context.applicationContext.getSharedPreferences("walkthrough", Context.MODE_PRIVATE)
 
@@ -102,7 +98,6 @@ class WalkthroughStore(context: Context) {
     }
 }
 
-/** The three levels of the banner: a dot and the name in its colour, then what it means. */
 @Composable
 private fun StatusLegend() {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -110,7 +105,6 @@ private fun StatusLegend() {
             val title = stringResource(status.titleRes())
             val description = stringResource(status.descriptionRes())
             val color = status.color()
-            // The dot sits in line with the first line of its paragraph.
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Box(Modifier.padding(top = 4.dp).size(12.dp).background(color, CircleShape))
                 Text(
@@ -128,7 +122,6 @@ private fun StatusLegend() {
     }
 }
 
-/** Asks before the tour starts: it is only shown to whoever wants it. */
 @Composable
 fun WalkthroughOffer(onAccept: () -> Unit, onDecline: () -> Unit) {
     AlertDialog(
@@ -140,10 +133,7 @@ fun WalkthroughOffer(onAccept: () -> Unit, onDecline: () -> Unit) {
     )
 }
 
-/**
- * Dims the screen except for the current target, with a short explanation next to it. Touches outside
- * the buttons are swallowed, so the screen underneath cannot be used until the tour ends.
- */
+/** Touches outside the buttons are swallowed: the screen underneath stays out of reach during the tour. */
 @Composable
 fun WalkthroughOverlay(
     steps: List<WalkStep>,
@@ -172,7 +162,6 @@ fun WalkthroughOverlay(
             .onSizeChanged { screenHeight = it.height }
             .pointerInput(Unit) { detectTapGestures { } }
     ) {
-        // Below the target when there is room for the bubble, above it otherwise.
         val gap = with(density) { 12.dp.toPx() }
         val below = target == null || target.bottom + gap + bubbleHeight < screenHeight
         val y = when {
@@ -195,7 +184,6 @@ fun WalkthroughOverlay(
                     cornerRadius = CornerRadius(with(density) { 20.dp.toPx() }),
                     blendMode = BlendMode.Clear
                 )
-                // A tip on the edge of the bubble, in line with the middle of the target.
                 val half = 12.dp.toPx()
                 val x = target.center.x.coerceIn(28.dp.toPx() + half, size.width - 28.dp.toPx() - half)
                 val edge = if (below) y else y + bubbleHeight

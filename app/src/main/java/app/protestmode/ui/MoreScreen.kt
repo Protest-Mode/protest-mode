@@ -42,7 +42,6 @@ private class MoreEntry(
     val onClick: () -> Unit
 )
 
-/** Everything besides the checks, on its own screen with the same cards as the list. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoreScreen(

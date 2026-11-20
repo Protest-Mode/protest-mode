@@ -24,7 +24,6 @@ import app.protestmode.ui.descriptionRes
 import app.protestmode.ui.theme.LocalListColors
 import app.protestmode.ui.titleRes
 
-/** Stays at the top of the list, with what the category covers, while its settings scroll. */
 @Composable
 fun CategoryHeader(category: SettingCategory, protectedCount: Int, total: Int, modifier: Modifier = Modifier) {
     val title = stringResource(category.titleRes())

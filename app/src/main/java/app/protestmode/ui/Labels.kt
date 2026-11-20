@@ -61,7 +61,6 @@ fun SettingRow.stateRes() = if (state == SettingState.UNKNOWN && confirmed) {
 fun SettingRow.verdictRes() = when (status) {
     RowStatus.PROTECTED -> R.string.target_ok
     RowStatus.TO_CHECK -> R.string.target_unknown
-    // What to do, without repeating the state: the setting's name already says what it is about.
     RowStatus.EXPOSED -> when (id) {
         SettingId.SCREEN_LOCK -> R.string.target_secure
         SettingId.LOCKSCREEN_NOTIFICATIONS -> R.string.target_hide
@@ -74,7 +73,6 @@ fun SettingRow.verdictRes() = when (status) {
     }
 }
 
-/** Why a setting to change is a risk; null once it is protected. */
 @StringRes
 fun SettingRow.whyRes(): Int? = when (status) {
     RowStatus.PROTECTED -> null

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import app.protestmode.MainActivity
 
-/** Switches the launcher entry: the chosen disguise is the only enabled alias. Nothing else is stored. */
 class DisguiseManager(context: Context) {
     private val appContext = context.applicationContext
     private val packageManager = appContext.packageManager

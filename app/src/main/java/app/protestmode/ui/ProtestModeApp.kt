@@ -88,7 +88,6 @@ private fun Context.startSafely(intent: Intent): Boolean = try {
     false
 }
 
-/** Without an email app, the support address is shown with an action to copy it. */
 private suspend fun offerSupportAddress(context: Context, resources: Resources, snackbar: SnackbarHostState) {
     val result = snackbar.showSnackbar(
         message = resources.getString(R.string.feedback_no_mail_app, FeedbackMail.SUPPORT_EMAIL),
